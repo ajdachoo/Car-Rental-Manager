@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Navigation from 'components/organisms/Navigation/Navigation';
+import DataSection from '../DataSection/DataSection';
 
 interface MainTemplateProps {
     children: React.ReactNode;
@@ -16,6 +17,7 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
     return (
         <Wrapper>
             <Navigation />
+            <DataSection />
             {children}
         </Wrapper>
     );

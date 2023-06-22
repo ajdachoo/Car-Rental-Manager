@@ -10,6 +10,7 @@ const Logo = styled.div`
 
     h1 {
         font-size: ${({ theme }) => theme.fontSize.xl};
+        text-align: center;
     }
 
     &:hover {
@@ -20,6 +21,7 @@ const Logo = styled.div`
 
 const Wrapper = styled.div`
     display: flex;
+    min-width: 290px;
     flex-direction: column;
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.c1};
@@ -29,7 +31,6 @@ const HomeLink = styled.div`
     height: 60px;
     font-size: ${({ theme }) => theme.fontSize.l};
     font-weight: 700;
-    border: solid red;
     color: ${({ theme }) => theme.colors.c5};
     display: flex;
     align-items: center;
@@ -48,7 +49,7 @@ const HomeLink = styled.div`
     }
 `;
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
     return (
         <Wrapper>
             <Logo>
