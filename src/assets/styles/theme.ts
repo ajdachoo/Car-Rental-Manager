@@ -8,6 +8,8 @@ export const theme = {
         c6: '#1B2838',
         c7: '#EAEFF1',
         c8: '#E9F1F7',
+        c9: '#0E2E49',
+        c10: '#4FC3F7',
     },
     fontSize: {
         xxl: '34px',

@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const Logo = styled.div`
     color: ${({ theme }) => theme.colors.c2};
     background-color: ${({ theme }) => theme.colors.c4};
-    border-bottom: solid 2px ${({ theme }) => theme.colors.c3};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.c3};
     padding: 0 20px;
 
     h1 {
@@ -25,20 +26,22 @@ export const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.c1};
 `;
 
-export const HomeLink = styled.div`
+export const HomeLink = styled(NavLink)`
     height: 60px;
-    font-size: ${({ theme }) => theme.fontSize.l};
+    font-size: ${({ theme }) => theme.fontSize.ml};
     font-weight: 700;
     color: ${({ theme }) => theme.colors.c5};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.c3};
     display: flex;
     align-items: center;
     justify-content: start;
     padding: 10px 20px;
     gap: 20px;
+    text-decoration: none;
     
     svg {
         fill: ${({ theme }) => theme.colors.c5};
-        height: ${({ theme }) => theme.fontSize.l};
+        height: ${({ theme }) => theme.fontSize.ml};
         padding: 0;
     }
 
