@@ -1,14 +1,11 @@
-import axios from 'axios';
 import { useCallback } from 'react';
+import API from './API';
 
-const carsAPI = axios.create({
-    baseURL: 'https://localhost:5001/api',
-});
 
 export const useCars = () => {
     const getCars = useCallback(async () => {
         try {
-            const result = await carsAPI.get<CarProp[]>('/cars');
+            const result = await API.get<CarProp[]>('/cars');
             return result.data;
         } catch (e) {
             console.log(e);

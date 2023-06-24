@@ -14,7 +14,14 @@ const Navigation: React.FC = () => {
             </HomeLink>
             <NavSection>
                 <p>Pojazdy</p>
-                <StyledNavLink to="/dupa0"><NewIcon />Dupa</StyledNavLink>
+                <StyledNavLink to="/cars"><NewIcon />Tabela pojazdów</StyledNavLink>
+                <StyledNavLink to="/dupa1"><NewIcon />Dupa</StyledNavLink>
+                <StyledNavLink to="/dupa2"><NewIcon />Dupa</StyledNavLink>
+                <StyledNavLink to="/dupa3"><NewIcon />Dupa</StyledNavLink>
+            </NavSection>
+            <NavSection>
+                <p>Klienci</p>
+                <StyledNavLink to="/clients"><NewIcon />Tabela klientów</StyledNavLink>
                 <StyledNavLink to="/dupa1"><NewIcon />Dupa</StyledNavLink>
                 <StyledNavLink to="/dupa2"><NewIcon />Dupa</StyledNavLink>
                 <StyledNavLink to="/dupa3"><NewIcon />Dupa</StyledNavLink>
