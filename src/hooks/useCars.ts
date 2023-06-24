@@ -1,4 +1,29 @@
-export const cars = [
+import axios from 'axios';
+import { useCallback } from 'react';
+
+const carsAPI = axios.create({
+    baseURL: 'https://localhost:5001/api',
+});
+
+export const useCars = () => {
+    const getCars = useCallback(async () => {
+        try {
+            const result = await carsAPI.get<CarProp[]>('/cars');
+            return result.data;
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+    return { getCars };
+};
+
+
+
+
+
+
+/* export const cars = [
     {
         "id": 1,
         "registrationNumber": "Test324",
@@ -44,9 +69,9 @@ export const cars = [
         "priceForDay": 0,
         "comments": null
     }
-];
+]; */
 
-export type CarProp = {
+export interface CarProp {
     id: number;
     registrationNumber: string;
     vinNumer: string;
