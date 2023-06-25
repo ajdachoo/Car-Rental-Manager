@@ -20,9 +20,10 @@ export const Logo = styled.div`
 
 export const Wrapper = styled.div`
     display: flex;
-    min-width: 290px;
+    min-width: 310px;
     flex-direction: column;
     height: 100vh;
+    overflow-y: scroll;
     background-color: ${({ theme }) => theme.colors.c1};
 `;
 
