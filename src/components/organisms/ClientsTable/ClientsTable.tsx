@@ -9,19 +9,26 @@ const headers = ['ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Tele
 const ClientsTable: React.FC = () => {
     const [clients, setClients] = useState<ClientProp[]>();
     const status = 'Ładowanie...';
-    const { getClients } = useClients();
+    const { getClients, deleteClient } = useClients();
 
     useEffect(() => {
-        (async () => {
-            const clients = await getClients();
-            setClients(clients);
-        })();
-    }, [getClients]);
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const clients = await getClients();
+        setClients(clients);
+    };
+
+    const handleDeleteClient = async (id: number) => {
+        await deleteClient(id);
+        fetchData();
+    };
 
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {clients ? clients.map((client) => (<ClientTableRow key={client.id} clientData={client} />)) : <tr><th>{status}</th></tr>}
+                {clients ? clients.map((client) => (<ClientTableRow handleDeleteClient={handleDeleteClient} key={client.id} clientData={client} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );

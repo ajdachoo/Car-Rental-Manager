@@ -1,12 +1,15 @@
 import React from 'react';
 import { StyledTr, StyledTd } from './ClientsTableRow.styles'
+import { Button } from 'components/atoms/Button/Button';
 import { ClientProp } from 'hooks/useClients';
 
 interface ClientsTableRowProps {
     clientData: ClientProp;
+    handleDeleteClient: Function;
 }
 
-const ClientTableRow: React.FC<ClientsTableRowProps> = ({ clientData: { id, firstName, lastName, peselOrPassportNumber, email, phoneNumber, drivingLicenseCategory, isBlocked, comments } }) => {
+const ClientTableRow: React.FC<ClientsTableRowProps> = ({ handleDeleteClient, clientData: { id, firstName, lastName, peselOrPassportNumber, email, phoneNumber, drivingLicenseCategory, isBlocked, comments } }) => {
+
     return (
         <StyledTr>
             <StyledTd>{id}</StyledTd>
@@ -18,6 +21,7 @@ const ClientTableRow: React.FC<ClientsTableRowProps> = ({ clientData: { id, firs
             <StyledTd>{drivingLicenseCategory}</StyledTd>
             <StyledTd>{isBlocked ? 'Tak' : 'Nie'}</StyledTd>
             <StyledTd>{comments}</StyledTd>
+            <StyledTd><Button onClick={() => handleDeleteClient(id)}>Usuń</Button></StyledTd>
         </StyledTr>
     );
 };

@@ -11,7 +11,16 @@ export const useClients = () => {
         }
     }, []);
 
-    return { getClients };
+    const deleteClient = useCallback(async (id: number) => {
+        try {
+            const result = await API.delete(`/clients/${id}`);
+            return result.data;
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+    return { deleteClient, getClients };
 };
 
 export interface ClientProp {
