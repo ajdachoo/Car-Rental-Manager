@@ -10,6 +10,9 @@ export const theme = {
         c8: '#E9F1F7',
         c9: '#0E2E49',
         c10: '#4FC3F7',
+        warning: '#F93E3E',
+        inProgress: '#FCA130',
+        succes: '#49CC90',
     },
     fontSize: {
         xxl: '34px',

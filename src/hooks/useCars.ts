@@ -15,59 +15,6 @@ export const useCars = () => {
     return { getCars };
 };
 
-
-
-
-
-
-/* export const cars = [
-    {
-        "id": 1,
-        "registrationNumber": "Test324",
-        "vinNumer": "Test75",
-        "mark": "TestMark3",
-        "model": "TestMode34",
-        "automaticTransmission": false,
-        "horsepower": 200,
-        "countPlace": 2,
-        "category": "B",
-        "efficientNow": false,
-        "availableNow": false,
-        "priceForDay": 0,
-        "comments": "samochod sportowy"
-    },
-    {
-        "id": 2,
-        "registrationNumber": "Test623",
-        "vinNumer": "Test442",
-        "mark": "TestMark2",
-        "model": "TestModel2",
-        "automaticTransmission": false,
-        "horsepower": 90,
-        "countPlace": 4,
-        "category": "B",
-        "efficientNow": true,
-        "availableNow": true,
-        "priceForDay": 0,
-        "comments": "uszkodzona kierwnica"
-    },
-    {
-        "id": 3,
-        "registrationNumber": "Test123",
-        "vinNumer": "Test432",
-        "mark": "TestMark1",
-        "model": "TestModel1",
-        "automaticTransmission": false,
-        "horsepower": 86,
-        "countPlace": 5,
-        "category": "B",
-        "efficientNow": true,
-        "availableNow": true,
-        "priceForDay": 0,
-        "comments": null
-    }
-]; */
-
 export interface CarProp {
     id: number;
     registrationNumber: string;
