@@ -7,3 +7,4 @@ const API = axios.create({
 export default API;
 
 //https://rentcar-api-app.azurewebsites.net/api
+//https://localhost:5001/api/

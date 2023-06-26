@@ -12,7 +12,16 @@ export const useCars = () => {
         }
     }, []);
 
-    return { getCars };
+    const deleteCar = useCallback(async (id: number) => {
+        try {
+            const result = await API.delete(`/cars/${id}`);
+            return result.data;
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+    return { getCars, deleteCar };
 };
 
 export interface CarProp {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledTr, StyledTd } from './ClientsTableRow.styles'
-import { Button } from 'components/atoms/Button/Button';
+import { StyledButton } from 'components/atoms/Button/Button';
 import { ClientProp } from 'hooks/useClients';
 
 interface ClientsTableRowProps {
@@ -21,7 +21,7 @@ const ClientTableRow: React.FC<ClientsTableRowProps> = ({ handleDeleteClient, cl
             <StyledTd>{drivingLicenseCategory}</StyledTd>
             <StyledTd>{isBlocked ? 'Tak' : 'Nie'}</StyledTd>
             <StyledTd>{comments}</StyledTd>
-            <StyledTd><Button onClick={() => handleDeleteClient(id)}>Usuń</Button></StyledTd>
+            <StyledTd><StyledButton onClick={() => handleDeleteClient(id)}>Usuń</StyledButton></StyledTd>
         </StyledTr>
     );
 };

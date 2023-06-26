@@ -9,19 +9,28 @@ const headers = ['ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria',
 const CarsTable: React.FC = () => {
     const [cars, setCars] = useState<CarProp[]>();
     const status = 'Ładowanie...';
-    const { getCars } = useCars();
+    const { getCars, deleteCar } = useCars();
 
     useEffect(() => {
-        (async () => {
-            const cars = await getCars();
-            setCars(cars);
-        })();
-    }, [getCars]);
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const clients = await getCars();
+        setCars(clients);
+    };
+
+    const handleDeleteCar = async (id: number) => {
+        await deleteCar(id);
+        fetchData();
+    };
+
+
 
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {cars ? cars.map((car) => (<CarTableRow key={car.id} carData={car} />)) : <tr><th>{status}</th></tr>}
+                {cars ? cars.map((car) => (<CarTableRow handleDeleteCar={handleDeleteCar} key={car.id} carData={car} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );
