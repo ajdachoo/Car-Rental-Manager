@@ -4,7 +4,7 @@ import ClientTableRow from 'components/molecules/ClientsTableRow/ClientsTableRow
 import { useClients, ClientProp } from 'hooks/useClients';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 
-const headers = ['ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategoria prawa jazdy', 'Zablokowany', 'Komentarz'];
+const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategoria prawa jazdy', 'Zablokowany', 'Komentarz'];
 
 const ClientsTable: React.FC = () => {
     const [clients, setClients] = useState<ClientProp[]>();
@@ -28,7 +28,7 @@ const ClientsTable: React.FC = () => {
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {clients ? clients.map((client) => (<ClientTableRow handleDeleteClient={handleDeleteClient} key={client.id} clientData={client} />)) : <tr><th>{status}</th></tr>}
+                {clients ? clients.map((client, index) => (<ClientTableRow index={index} handleDeleteClient={handleDeleteClient} key={client.id} clientData={client} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );

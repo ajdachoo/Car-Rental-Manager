@@ -29,4 +29,5 @@ export interface RentalProp {
     dateOfReturn: string;
     comment: null | string;
     status: -1 | 0 | 1;
+    price: number;
 };

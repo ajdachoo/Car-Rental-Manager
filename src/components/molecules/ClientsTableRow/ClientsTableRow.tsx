@@ -6,12 +6,14 @@ import { ClientProp } from 'hooks/useClients';
 interface ClientsTableRowProps {
     clientData: ClientProp;
     handleDeleteClient: Function;
+    index: number;
 }
 
-const ClientTableRow: React.FC<ClientsTableRowProps> = ({ handleDeleteClient, clientData: { id, firstName, lastName, peselOrPassportNumber, email, phoneNumber, drivingLicenseCategory, isBlocked, comments } }) => {
+const ClientTableRow: React.FC<ClientsTableRowProps> = ({ index, handleDeleteClient, clientData: { id, firstName, lastName, peselOrPassportNumber, email, phoneNumber, drivingLicenseCategory, isBlocked, comments } }) => {
 
     return (
         <StyledTr>
+            <StyledTd>{`${index + 1}.`}</StyledTd>
             <StyledTd>{id}</StyledTd>
             <StyledTd>{firstName}</StyledTd>
             <StyledTd>{lastName}</StyledTd>

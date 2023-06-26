@@ -4,6 +4,7 @@ import { RentalProp } from 'hooks/useRentals';
 
 interface RentalsTableRowProps {
     rentalData: RentalProp;
+    index: number;
 }
 
 const getFormatDate = (date: Date): string => {
@@ -16,7 +17,7 @@ const getDiffDate = (date1: Date, date2: Date) => {
     return diffhours;
 };
 
-const RentalTableRow: React.FC<RentalsTableRowProps> = ({ rentalData: { id, carId, carMark, carModel, registrationNumber, clientId, firstName, lastName, peselOrPassportNumber, hireDate, expectedDateOfReturn, dateOfReturn, comment, status } }) => {
+const RentalTableRow: React.FC<RentalsTableRowProps> = ({ index, rentalData: { id, carId, carMark, carModel, registrationNumber, clientId, firstName, lastName, peselOrPassportNumber, hireDate, expectedDateOfReturn, dateOfReturn, comment, status, price } }) => {
 
     const hireDateFormat = new Date(hireDate);
     const expectedDateOfReturnFormat = new Date(expectedDateOfReturn);
@@ -33,6 +34,7 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ rentalData: { id, carI
 
     return (
         <StyledTr>
+            <StyledTd>{`${index + 1}.`}</StyledTd>
             <StyledTd>{id}</StyledTd>
             <StyledTd>{carId}</StyledTd>
             <StyledTd>{carMark}</StyledTd>
@@ -43,9 +45,9 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ rentalData: { id, carI
             <StyledTd>{lastName}</StyledTd>
             <StyledTd>{peselOrPassportNumber}</StyledTd>
             <StyledTd>{getFormatDate(hireDateFormat) + ' do ' + getFormatDate(expectedDateOfReturnFormat)}</StyledTd>
-            {getStatusComponent()}
-            <StyledTd></StyledTd>
-            <StyledTd ></StyledTd>
+            <StyledTd>{getStatusComponent()}</StyledTd>
+            <StyledTd >{`${price.toFixed(2)} zł.`}</StyledTd>
+            <StyledTd >{comment}</StyledTd>
         </StyledTr>
     );
 };

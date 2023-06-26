@@ -4,7 +4,7 @@ import RentalTableRow from 'components/molecules/RentalTableRow/RentalTableRow';
 import { useRentals, RentalProp } from 'hooks/useRentals';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 
-const headers = ['ID', 'ID pojazdu', 'Marka', 'Model', 'Nr rejestracyjny', 'ID klienta', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Okres wypożyczenia', 'Status', 'Komentarz'];
+const headers = ['#', 'ID', 'ID pojazdu', 'Marka', 'Model', 'Nr rejestracyjny', 'ID klienta', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Okres wypożyczenia', 'Status', 'Kwota', 'Komentarz'];
 
 const RentalsTable: React.FC = () => {
     const [rentals, setRentals] = useState<RentalProp[]>();
@@ -21,7 +21,7 @@ const RentalsTable: React.FC = () => {
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {rentals ? rentals.map((rental) => (<RentalTableRow key={rental.id} rentalData={rental} />)) : <tr><th>{status}</th></tr>}
+                {rentals ? rentals.map((rental, index) => (<RentalTableRow index={index} key={rental.id} rentalData={rental} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );

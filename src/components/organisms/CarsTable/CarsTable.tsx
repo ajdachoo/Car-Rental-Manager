@@ -4,7 +4,7 @@ import CarTableRow from 'components/molecules/CarTableRow/CarTableRow';
 import { useCars, CarProp } from 'hooks/useCars';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 
-const headers = ['ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin'];
+const headers = ['#', 'ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin'];
 
 const CarsTable: React.FC = () => {
     const [cars, setCars] = useState<CarProp[]>();
@@ -30,7 +30,7 @@ const CarsTable: React.FC = () => {
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {cars ? cars.map((car) => (<CarTableRow handleDeleteCar={handleDeleteCar} key={car.id} carData={car} />)) : <tr><th>{status}</th></tr>}
+                {cars ? cars.map((car, index) => (<CarTableRow index={index} handleDeleteCar={handleDeleteCar} key={car.id} carData={car} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );
