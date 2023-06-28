@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'components/molecules/DataTable/DataTable';
 import ClientTableRow from 'components/molecules/ClientsTableRow/ClientsTableRow';
-import { useClients, ClientProp } from 'hooks/useClients';
+import { useClients, ClientProps } from 'hooks/useClients';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 
 const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategoria prawa jazdy', 'Zablokowany', 'Komentarz'];
 
 const ClientsTable: React.FC = () => {
-    const [clients, setClients] = useState<ClientProp[]>();
+    const [clients, setClients] = useState<ClientProps[]>();
     const status = 'Ładowanie...';
     const { getClients, deleteClient } = useClients();
 

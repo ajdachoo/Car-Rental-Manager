@@ -4,7 +4,7 @@ import API from './API';
 export const useClients = () => {
     const getClients = useCallback(async () => {
         try {
-            const result = await API.get<ClientProp[]>('/clients');
+            const result = await API.get<ClientProps[]>('/clients');
             return result.data;
         } catch (e) {
             console.log(e);
@@ -20,11 +20,45 @@ export const useClients = () => {
         }
     }, []);
 
-    return { deleteClient, getClients };
+    const postClient = useCallback(async (client: ClientFormProps) => {
+        try {
+            const result = await API.post(`/clients`, client);
+            console.log(result);
+            return result.data;
+        } catch (e) {
+            console.log(e);
+            return e;
+        }
+    }, []);
+
+    const putClient = useCallback(async (client: ClientFormProps, clientID: number) => {
+        try {
+            const result = await API.put(`/clients/${clientID}`, client);
+            console.log(result);
+            return result.data;
+        } catch (e) {
+            console.log(e);
+            return e;
+        }
+    }, []);
+
+    const getClient = useCallback(async (id: number) => {
+        try {
+            const result = await API.get(`/clients/${id}`);
+            return result.data;
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+    return { deleteClient, getClients, postClient, putClient, getClient };
 };
 
-export interface ClientProp {
+export interface ClientProps extends ClientFormProps {
     id: number;
+};
+
+export interface ClientFormProps {
     firstName: string;
     lastName: string;
     peselOrPassportNumber: string;

@@ -1,15 +1,17 @@
 import React from 'react';
 import { StyledTr, StyledTd } from './ClientsTableRow.styles'
 import { StyledButton } from 'components/atoms/Button/Button';
-import { ClientProp } from 'hooks/useClients';
+import { ClientProps } from 'hooks/useClients';
+import { useNavigate } from 'react-router-dom';
 
 interface ClientsTableRowProps {
-    clientData: ClientProp;
+    clientData: ClientProps;
     handleDeleteClient: Function;
     index: number;
 }
 
 const ClientTableRow: React.FC<ClientsTableRowProps> = ({ index, handleDeleteClient, clientData: { id, firstName, lastName, peselOrPassportNumber, email, phoneNumber, drivingLicenseCategory, isBlocked, comments } }) => {
+    const navigate = useNavigate();
 
     return (
         <StyledTr>
@@ -24,6 +26,7 @@ const ClientTableRow: React.FC<ClientsTableRowProps> = ({ index, handleDeleteCli
             <StyledTd>{isBlocked ? 'Tak' : 'Nie'}</StyledTd>
             <StyledTd>{comments}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteClient(id)}>Usuń</StyledButton></StyledTd>
+            <StyledTd><StyledButton onClick={() => navigate(`/editClient/${id}`)}>Edytuj</StyledButton></StyledTd>
         </StyledTr>
     );
 };

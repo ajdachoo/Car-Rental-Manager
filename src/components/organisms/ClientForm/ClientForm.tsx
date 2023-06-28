@@ -1,0 +1,84 @@
+import React, { useState } from "react";
+import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper.styles";
+import FormField from "components/molecules/FormField/FormField";
+import { ClientFormProps, useClients } from "hooks/useClients";
+import { StyledButton } from "components/atoms/Button/Button";
+import { useNavigate, useParams } from "react-router-dom";
+import { isAxiosError } from "axios";
+
+interface FormProps {
+    initialformValues?: ClientFormProps;
+    method: 'add' | 'edit';
+    clientEditID?: number;
+};
+
+const initialFormState: ClientFormProps = {
+    firstName: '',
+    lastName: '',
+    peselOrPassportNumber: '',
+    email: '',
+    phoneNumber: '',
+    drivingLicenseCategory: '',
+    isBlocked: false,
+    comments: '',
+};
+
+
+
+const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState, method, clientEditID }) => {
+    const [formValues, setFormValues] = useState<ClientFormProps>(initialformValues);
+    const { postClient, putClient } = useClients();
+    const navigate = useNavigate();
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormValues({
+            ...formValues,
+            [e.target.name]: e.target.value
+        });
+        console.log(formValues);
+    };
+
+    const handleAddClient = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const response = await postClient(formValues);
+        if (isAxiosError(response)) {
+            alert('niepoprawne dane!');
+        } else {
+            setFormValues(initialFormState);
+            navigate('/clients');
+        }
+    };
+
+    const handleEditClient = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (clientEditID) {
+            const response = await putClient(formValues, clientEditID);
+            if (isAxiosError(response)) {
+                alert('niepoprawne dane!');
+            } else {
+                setFormValues(initialFormState);
+                navigate('/clients');
+            }
+        } else {
+            alert('niepoprawne dane!');
+        }
+    };
+
+    return (
+        <ViewWrapper as="form" onSubmit={method === 'add' ? handleAddClient : handleEditClient}>
+            <h1>{method === 'add' ? 'Dodaj nowego klienta' : 'Edytuj dane klienta'}</h1>
+            <FormField label="Imię" id="firstName" name="firstName" value={formValues.firstName} onChange={handleInputChange} />
+            <FormField label="Nazwisko" id="lastName" name="lastName" value={formValues.lastName} onChange={handleInputChange} />
+            <FormField label="Nr paszportu/pesel" id="peselOrPassportNumber" name="peselOrPassportNumber" value={formValues.peselOrPassportNumber} onChange={handleInputChange} />
+            <FormField type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
+            <FormField type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
+            <FormField label="Kategoria prawa jazdy" id="drivingLicenseCategory" name="drivingLicenseCategory" value={formValues.drivingLicenseCategory} onChange={handleInputChange} />
+            <FormField label="Zablokowany" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange} />
+            <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
+            <StyledButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</StyledButton>
+        </ViewWrapper>
+    );
+};
+
+export default ClientForm;
