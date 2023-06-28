@@ -44,7 +44,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`${inputStyles}`;
 
-const StyledSelect = styled.select`inputStyles`;
+const StyledSelect = styled.select`${inputStyles}`;
 
 export const FormField: React.FC<FormFieldProps> = ({ onChange, value, label, name, id, type = 'text' }) => {
     return (
