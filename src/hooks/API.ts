@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: 'https://rentcar-api-app.azurewebsites.net/api',
+    baseURL: 'https://localhost:5001/api/',
 });
 
 export default API;

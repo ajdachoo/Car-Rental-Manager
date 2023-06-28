@@ -22,8 +22,8 @@ export const useClients = () => {
 
     const postClient = useCallback(async (client: ClientFormProps) => {
         try {
+            console.log(client);
             const result = await API.post(`/clients`, client);
-            console.log(result);
             return result.data;
         } catch (e) {
             console.log(e);
@@ -33,6 +33,7 @@ export const useClients = () => {
 
     const putClient = useCallback(async (client: ClientFormProps, clientID: number) => {
         try {
+            console.log(client);
             const result = await API.put(`/clients/${clientID}`, client);
             console.log(result);
             return result.data;

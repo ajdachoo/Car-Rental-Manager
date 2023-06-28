@@ -16,7 +16,7 @@ html {
     overflow-y: hidden;
   }
   
-  a, button {
+  a, button, input {
     font-family: 'Montserrat', sans-serif;
   }
 `;
