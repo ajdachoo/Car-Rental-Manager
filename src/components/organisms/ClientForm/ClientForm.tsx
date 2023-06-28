@@ -35,7 +35,6 @@ const BlockedOptions: formSelectOptionProps[] = [
     }];
 
 
-
 const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState, method, clientEditID }) => {
     const [formValues, setFormValues] = useState<ClientFormProps>(initialformValues);
     const { postClient, putClient } = useClients();
@@ -46,6 +45,7 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
             ...formValues,
             [e.target.name]: e.target.value
         });
+        console.log(formValues);
     };
 
     const handleAddClient = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,7 +61,6 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
 
     const handleEditClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         if (clientEditID) {
             const response = await putClient(formValues, clientEditID);
             if (isAxiosError(response)) {

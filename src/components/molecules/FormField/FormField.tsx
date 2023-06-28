@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler } from "react";
-import styled, { css } from "styled-components";
+import { Wrapper } from "./Form.styles";
+import { StyledLabel, StyledInput, StyledSelect } from "./Form.styles";
 
 interface FormFieldProps {
     onChange: ChangeEventHandler;
@@ -23,28 +24,6 @@ export interface formSelectOptionProps {
     option: string;
     value: string | number;
 };
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 10px 0;
-`;
-
-const inputStyles = css`
-    border: solid 2px ${({ theme }) => theme.colors.c8};
-    border-radius: 5px;
-    padding: 5px;
-`;
-
-const StyledLabel = styled.label`
-    color: ${({ theme }) => theme.colors.c5};
-    font-size: ${({ theme }) => theme.fontSize.ml};
-    font-weight: 700;
-`;
-
-const StyledInput = styled.input`${inputStyles}`;
-
-const StyledSelect = styled.select`${inputStyles}`;
 
 export const FormField: React.FC<FormFieldProps> = ({ onChange, value, label, name, id, type = 'text' }) => {
     return (

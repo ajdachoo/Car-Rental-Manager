@@ -16,7 +16,6 @@ const ClientEditForm = () => {
     const fetchData = async () => {
         if (editClientID) {
             const client = await getClient(parseInt(editClientID));
-            console.log(client);
             setEditClient(client);
         }
 
