@@ -23,6 +23,9 @@ export const useRentals = () => {
     const postRental = useCallback(async (rental: RentalPutPostProps) => {
         try {
             console.log(rental);
+            if (rental.dateOfReturn === '') {
+                rental.dateOfReturn = null;
+            }
             const result = await API.post(`/hires`, rental);
             return result.data;
         } catch (e) {
@@ -76,6 +79,6 @@ export interface RentalPutPostProps {
     clientId: number;
     hireDate: string;
     expectedDateOfReturn: string;
-    dateOfReturn: string;
+    dateOfReturn: string | null;
     comment: null | string;
 };

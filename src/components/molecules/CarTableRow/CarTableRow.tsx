@@ -10,7 +10,7 @@ interface CarTableRowProps {
     index: number;
 }
 
-const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carData: { id, mark, model, automaticTransmission, horsepower, category, countPlace, priceForDay, registrationNumber, vinNumer } }) => {
+const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carData: { id, mark, model, automaticTransmission, horsepower, category, countPlace, priceForDay, registrationNumber, vinNumer, availableNow, efficientNow } }) => {
     const navigate = useNavigate();
 
     return (
@@ -26,6 +26,8 @@ const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carDa
             <StyledTd>{`${priceForDay.toFixed(2)} zł.`}</StyledTd>
             <StyledTd>{registrationNumber}</StyledTd>
             <StyledTd>{vinNumer}</StyledTd>
+            <StyledTd>{availableNow ? 'Tak' : 'Nie'}</StyledTd>
+            <StyledTd>{efficientNow ? 'Tak' : 'Nie'}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteCar(id)}>Usuń</StyledButton></StyledTd>
             <StyledTd><StyledButton onClick={() => navigate(`/editCar/${id}`)}>Edytuj</StyledButton></StyledTd>
         </StyledTr>
