@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyledTr, StyledTd } from './RentalTableRow.styles'
 import { RentalProp } from 'hooks/useRentals';
+import { StyledButton } from 'components/atoms/Button/Button';
 
 interface RentalsTableRowProps {
     rentalData: RentalProp;
     index: number;
+    handleDeleteRental: Function;
 }
 
 const getFormatDate = (date: Date): string => {
@@ -17,7 +19,7 @@ const getDiffDate = (date1: Date, date2: Date) => {
     return diffhours;
 };
 
-const RentalTableRow: React.FC<RentalsTableRowProps> = ({ index, rentalData: { id, carId, carMark, carModel, registrationNumber, clientId, firstName, lastName, peselOrPassportNumber, hireDate, expectedDateOfReturn, dateOfReturn, comment, status, price } }) => {
+const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, index, rentalData: { id, carId, carMark, carModel, registrationNumber, clientId, firstName, lastName, peselOrPassportNumber, hireDate, expectedDateOfReturn, dateOfReturn, comment, status, price } }) => {
 
     const hireDateFormat = new Date(hireDate);
     const expectedDateOfReturnFormat = new Date(expectedDateOfReturn);
@@ -48,6 +50,7 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ index, rentalData: { i
             <StyledTd>{getStatusComponent()}</StyledTd>
             <StyledTd >{`${price.toFixed(2)} zł.`}</StyledTd>
             <StyledTd >{comment}</StyledTd>
+            <StyledTd><StyledButton onClick={() => handleDeleteRental(id)}>Zakończ</StyledButton></StyledTd>
         </StyledTr>
     );
 };

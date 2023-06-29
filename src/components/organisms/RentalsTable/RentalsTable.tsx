@@ -9,19 +9,26 @@ const headers = ['#', 'ID', 'ID pojazdu', 'Marka', 'Model', 'Nr rejestracyjny', 
 const RentalsTable: React.FC = () => {
     const [rentals, setRentals] = useState<RentalProp[]>();
     const status = 'Ładowanie...';
-    const { getRentals } = useRentals();
+    const { getRentals, deleteRental } = useRentals();
 
     useEffect(() => {
-        (async () => {
-            const rentals = await getRentals();
-            setRentals(rentals);
-        })();
-    }, [getRentals]);
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const rental = await getRentals();
+        setRentals(rental);
+    };
+
+    const handleDeleteRental = async (id: number) => {
+        await deleteRental(id);
+        fetchData();
+    };
 
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {rentals ? rentals.map((rental, index) => (<RentalTableRow index={index} key={rental.id} rentalData={rental} />)) : <tr><th>{status}</th></tr>}
+                {rentals ? rentals.map((rental, index) => (<RentalTableRow handleDeleteRental={handleDeleteRental} index={index} key={rental.id} rentalData={rental} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );
