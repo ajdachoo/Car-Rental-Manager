@@ -39,7 +39,7 @@ export const FormFieldSelect: React.FC<FormFieldSelectProps> = ({ onChange, valu
         <Wrapper>
             <StyledLabel htmlFor={id}>{label}</StyledLabel>
             <StyledSelect name={name} id={id} value={value} onChange={onChange}>
-                {options.map((option) => <option value={option.value}>{option.option}</option>)}
+                {options.map((option) => <option key={option.option} value={option.value}>{option.option}</option>)}
             </StyledSelect>
         </Wrapper>
     );

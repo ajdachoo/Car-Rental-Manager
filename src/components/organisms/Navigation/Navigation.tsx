@@ -16,7 +16,7 @@ const Navigation: React.FC = () => {
             <NavSection>
                 <p>Pojazdy</p>
                 <StyledNavLink to="/cars"><TableListIcon />Tabela pojazdów</StyledNavLink>
-                <StyledNavLink to="/dupa1"><NewIcon />Dodaj nowy pojazd</StyledNavLink>
+                <StyledNavLink to="/addCar"><NewIcon />Dodaj nowy pojazd</StyledNavLink>
                 <StyledNavLink to="/dupa2"><NewIcon />Dupa</StyledNavLink>
                 <StyledNavLink to="/dupa3"><NewIcon />Dupa</StyledNavLink>
             </NavSection>

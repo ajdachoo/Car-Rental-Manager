@@ -1,15 +1,18 @@
 import React from 'react';
 import { StyledButton } from 'components/atoms/Button/Button';
 import { StyledTr, StyledTd } from './CarTableRow.styles'
-import { CarProp } from 'hooks/useCars';
+import { CarProps } from 'hooks/useCars';
+import { useNavigate } from 'react-router-dom';
 
 interface CarTableRowProps {
-    carData: CarProp;
+    carData: CarProps;
     handleDeleteCar: Function;
     index: number;
 }
 
 const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carData: { id, mark, model, automaticTransmission, horsepower, category, countPlace, priceForDay, registrationNumber, vinNumer } }) => {
+    const navigate = useNavigate();
+
     return (
         <StyledTr>
             <StyledTd>{`${index + 1}.`}</StyledTd>
@@ -24,6 +27,7 @@ const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carDa
             <StyledTd>{registrationNumber}</StyledTd>
             <StyledTd>{vinNumer}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteCar(id)}>Usuń</StyledButton></StyledTd>
+            <StyledTd><StyledButton onClick={() => navigate(`/editCar/${id}`)}>Edytuj</StyledButton></StyledTd>
         </StyledTr>
     );
 };

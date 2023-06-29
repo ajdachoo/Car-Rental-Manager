@@ -35,7 +35,7 @@ const initialFormState: formValuesProps = {
     comments: '',
 };
 
-const BlockedOptions: formSelectOptionProps[] = [
+const yesNoOptions: formSelectOptionProps[] = [
     {
         option: 'Tak',
         value: 'true',
@@ -60,7 +60,6 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
             ...formValues,
             [e.target.name]: e.target.value
         });
-        console.log(formValues);
     };
 
     const handleAddClient = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -100,7 +99,7 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
             <FormField type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
             <FormField type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
             <FormField label="Kategoria prawa jazdy" id="drivingLicenseCategory" name="drivingLicenseCategory" value={formValues.drivingLicenseCategory} onChange={handleInputChange} />
-            <FormFieldSelect options={BlockedOptions} label="Zablokowany" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
+            <FormFieldSelect options={yesNoOptions} label="Zablokowany" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</FormButton>
         </ViewWrapper>

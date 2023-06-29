@@ -5,7 +5,9 @@ import React from 'react';
 import { Wrapper } from './DataSection.styles';
 import { Routes, Route } from 'react-router-dom';
 import ClientForm from 'components/organisms/ClientForm/ClientForm';
+import CarForm from 'components/organisms/CarForm/CarForm';
 import ClientEditForm from 'components/organisms/ClientEditForm/ClientEditForm';
+import CarEditForm from 'components/organisms/CarEditForm/CarEditForm';
 
 const DataSection: React.FC = () => {
     return (
@@ -16,6 +18,8 @@ const DataSection: React.FC = () => {
                 <Route path='/rentals' element={<RentalsTable />} />
                 <Route path='/addClient' element={<ClientForm method='add' />} />
                 <Route path='/editClient/:editClientID' element={<ClientEditForm />} />
+                <Route path='/addCar' element={<CarForm method='add' />} />
+                <Route path='/editCar/:editCarID' element={<CarEditForm />} />
             </Routes>
         </Wrapper>
     );
