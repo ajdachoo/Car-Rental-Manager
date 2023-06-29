@@ -4,7 +4,7 @@ import CarTableRow from 'components/molecules/CarTableRow/CarTableRow';
 import { useCars, CarProps } from 'hooks/useCars';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 
-const headers = ['#', 'ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin', 'Zajęty', 'Sprawny'];
+const headers = ['#', 'ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin', 'Dostępny', 'Sprawny'];
 
 const CarsTable: React.FC = () => {
     const [cars, setCars] = useState<CarProps[]>();
