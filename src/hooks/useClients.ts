@@ -20,9 +20,8 @@ export const useClients = () => {
         }
     }, []);
 
-    const postClient = useCallback(async (client: ClientFormProps) => {
+    const postClient = useCallback(async (client: ClientPutPostProps) => {
         try {
-            client.isBlocked = (client.isBlocked === 'true');
             const result = await API.post(`/clients`, client);
             return result.data;
         } catch (e) {
@@ -31,9 +30,8 @@ export const useClients = () => {
         }
     }, []);
 
-    const putClient = useCallback(async (client: ClientFormProps, clientID: number) => {
+    const putClient = useCallback(async (client: ClientPutPostProps, clientID: number) => {
         try {
-            client.isBlocked = (client.isBlocked === 'true');
             const result = await API.put(`/clients/${clientID}`, client);
             return result.data;
         } catch (e) {
@@ -54,17 +52,25 @@ export const useClients = () => {
     return { deleteClient, getClients, postClient, putClient, getClient };
 };
 
-export interface ClientProps extends ClientFormProps {
+export interface ClientProps {
     id: number;
-};
-
-export interface ClientFormProps {
     firstName: string;
     lastName: string;
     peselOrPassportNumber: string;
     email: string;
     phoneNumber: string;
     drivingLicenseCategory: string;
-    isBlocked: boolean | string;
+    isBlocked: boolean;
+    comments: string;
+};
+
+export interface ClientPutPostProps {
+    firstName: string;
+    lastName: string;
+    peselOrPassportNumber: string;
+    email: string;
+    phoneNumber: string;
+    drivingLicenseCategory: string;
+    isBlocked: boolean;
     comments: string;
 };

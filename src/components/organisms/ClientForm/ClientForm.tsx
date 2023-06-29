@@ -3,24 +3,35 @@ import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper.styles
 import { Title } from "components/molecules/FormField/Form.styles";
 import { FormField, FormFieldSelect, formSelectOptionProps } from "components/molecules/FormField/FormField";
 import { FormButton } from "components/molecules/FormField/Form.styles";
-import { ClientFormProps, useClients } from "hooks/useClients";
+import { ClientPutPostProps, useClients } from "hooks/useClients";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 
 interface FormProps {
-    initialformValues?: ClientFormProps;
+    initialformValues?: formValuesProps;
     method: 'add' | 'edit';
     clientEditID?: number;
 };
 
-const initialFormState: ClientFormProps = {
+export interface formValuesProps {
+    firstName: string;
+    lastName: string;
+    peselOrPassportNumber: string;
+    email: string;
+    phoneNumber: string;
+    drivingLicenseCategory: string;
+    isBlocked: string;
+    comments: string;
+};
+
+const initialFormState: formValuesProps = {
     firstName: '',
     lastName: '',
     peselOrPassportNumber: '',
     email: '',
     phoneNumber: '',
     drivingLicenseCategory: '',
-    isBlocked: false,
+    isBlocked: 'false',
     comments: '',
 };
 
@@ -34,9 +45,13 @@ const BlockedOptions: formSelectOptionProps[] = [
         value: 'false',
     }];
 
+const formValuesToClientProps = (formValues: formValuesProps): ClientPutPostProps => {
+    return { ...formValues, isBlocked: (formValues.isBlocked === 'true') };
+};
+
 
 const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState, method, clientEditID }) => {
-    const [formValues, setFormValues] = useState<ClientFormProps>(initialformValues);
+    const [formValues, setFormValues] = useState<formValuesProps>(initialformValues);
     const { postClient, putClient } = useClients();
     const navigate = useNavigate();
 
@@ -50,7 +65,8 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
 
     const handleAddClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const response = await postClient(formValues);
+        const formatclient = formValuesToClientProps(formValues)
+        const response = await postClient(formatclient);
         if (isAxiosError(response)) {
             alert('niepoprawne dane!');
         } else {
@@ -62,7 +78,8 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
     const handleEditClient = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (clientEditID) {
-            const response = await putClient(formValues, clientEditID);
+            const formatclient = formValuesToClientProps(formValues)
+            const response = await putClient(formatclient, clientEditID);
             if (isAxiosError(response)) {
                 alert('niepoprawne dane!');
             } else {

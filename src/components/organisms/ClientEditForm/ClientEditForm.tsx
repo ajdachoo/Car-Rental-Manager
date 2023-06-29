@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useClients, ClientFormProps, ClientProps } from "hooks/useClients";
-import ClientForm from "../ClientForm/ClientForm";
+import { useClients, ClientProps } from "hooks/useClients";
+import ClientForm, { formValuesProps } from "../ClientForm/ClientForm";
+
+const ClientPropsToFormValues = (client: ClientProps): formValuesProps => {
+    return { ...client, isBlocked: client.isBlocked.toString() };
+};
 
 const ClientEditForm = () => {
     const { editClientID } = useParams();
@@ -24,7 +28,7 @@ const ClientEditForm = () => {
     if (editClient) {
         return (
             <>
-                <ClientForm method="edit" initialformValues={editClient as ClientFormProps} clientEditID={editClient?.id} />
+                <ClientForm method="edit" initialformValues={ClientPropsToFormValues(editClient)} clientEditID={editClient?.id} />
             </>
         );
     } else {
