@@ -17,22 +17,16 @@ const Navigation: React.FC = () => {
                 <p>Pojazdy</p>
                 <StyledNavLink to="/cars"><TableListIcon />Tabela pojazdów</StyledNavLink>
                 <StyledNavLink to="/addCar"><NewIcon />Dodaj nowy pojazd</StyledNavLink>
-                <StyledNavLink to="/dupa2"><NewIcon />Dupa</StyledNavLink>
-                <StyledNavLink to="/dupa3"><NewIcon />Dupa</StyledNavLink>
             </NavSection>
             <NavSection>
                 <p>Klienci</p>
                 <StyledNavLink to="/clients"><TableListIcon />Tabela klientów</StyledNavLink>
                 <StyledNavLink to="/addClient"><NewIcon />Dodaj nowego klienta</StyledNavLink>
-                <StyledNavLink to="/dupa2"><NewIcon />Dupa</StyledNavLink>
-                <StyledNavLink to="/dupa3"><NewIcon />Dupa</StyledNavLink>
             </NavSection>
             <NavSection>
                 <p>Wypożyczenia</p>
                 <StyledNavLink to="/rentals"><TableListIcon />Tabela wypożyczeń</StyledNavLink>
-                <StyledNavLink to="/dupa1"><NewIcon />Stwórz wypożyczenie</StyledNavLink>
-                <StyledNavLink to="/dupa2"><NewIcon />Dupa</StyledNavLink>
-                <StyledNavLink to="/dupa3"><NewIcon />Dupa</StyledNavLink>
+                <StyledNavLink to="/addRental"><NewIcon />Stwórz wypożyczenie</StyledNavLink>
             </NavSection>
         </Wrapper>
     );

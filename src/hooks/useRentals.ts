@@ -22,6 +22,7 @@ export const useRentals = () => {
 
     const postRental = useCallback(async (rental: RentalPutPostProps) => {
         try {
+            console.log(rental);
             const result = await API.post(`/hires`, rental);
             return result.data;
         } catch (e) {
@@ -42,7 +43,7 @@ export const useRentals = () => {
 
     const getRental = useCallback(async (id: number) => {
         try {
-            const result = await API.get(`/cars/${id}`);
+            const result = await API.get(`/hires/${id}`);
             return result.data;
         } catch (e) {
             console.log(e);

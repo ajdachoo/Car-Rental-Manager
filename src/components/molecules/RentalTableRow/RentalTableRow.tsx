@@ -50,7 +50,7 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, in
             <StyledTd>{getStatusComponent()}</StyledTd>
             <StyledTd >{`${price.toFixed(2)} zł.`}</StyledTd>
             <StyledTd >{comment}</StyledTd>
-            <StyledTd><StyledButton onClick={() => handleDeleteRental(id)}>Zakończ</StyledButton></StyledTd>
+            <StyledTd><StyledButton onClick={() => handleDeleteRental(id)}>Usuń</StyledButton></StyledTd>
         </StyledTr>
     );
 };

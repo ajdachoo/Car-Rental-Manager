@@ -8,6 +8,7 @@ import ClientForm from 'components/organisms/ClientForm/ClientForm';
 import CarForm from 'components/organisms/CarForm/CarForm';
 import ClientEditForm from 'components/organisms/ClientEditForm/ClientEditForm';
 import CarEditForm from 'components/organisms/CarEditForm/CarEditForm';
+import RentalForm from 'components/organisms/RentalForm/RentalForm';
 
 const DataSection: React.FC = () => {
     return (
@@ -16,6 +17,7 @@ const DataSection: React.FC = () => {
                 <Route path='/cars' element={<CarsTable />} />
                 <Route path='/clients' element={<ClientsTable />} />
                 <Route path='/rentals' element={<RentalsTable />} />
+                <Route path='/addRental' element={<RentalForm method='add' />} />
                 <Route path='/addClient' element={<ClientForm method='add' />} />
                 <Route path='/editClient/:editClientID' element={<ClientEditForm />} />
                 <Route path='/addCar' element={<CarForm method='add' />} />
