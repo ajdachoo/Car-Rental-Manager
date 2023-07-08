@@ -63,6 +63,73 @@ const transmissionOptions: formSelectOptionProps[] = [
         value: 'false',
     }];
 
+const drivingLicenseCategories: formSelectOptionProps[] = [
+    {
+        option: 'AM',
+        value: 'AM',
+    },
+    {
+        option: 'A1',
+        value: 'A1',
+    },
+    {
+        option: 'A2',
+        value: 'A2',
+    },
+    {
+        option: 'A',
+        value: 'A',
+    },
+    {
+        option: 'B1',
+        value: 'B1',
+    },
+    {
+        option: 'B',
+        value: 'B',
+    },
+    {
+        option: 'C1',
+        value: 'C1',
+    },
+    {
+        option: 'C',
+        value: 'C',
+    },
+    {
+        option: 'D1',
+        value: 'D1',
+    },
+    {
+        option: 'D',
+        value: 'D',
+    },
+    {
+        option: 'BE',
+        value: 'BE',
+    },
+    {
+        option: 'C1E',
+        value: 'C1E',
+    },
+    {
+        option: 'CE',
+        value: 'CE',
+    },
+    {
+        option: 'D1E',
+        value: 'D1E',
+    },
+    {
+        option: 'DE',
+        value: 'DE',
+    },
+    {
+        option: 'T',
+        value: 'T',
+    },
+];
+
 const formValuesToCarProps = (formValues: formValuesProps): CarPutPostProps => {
     return {
         ...formValues,
@@ -123,7 +190,7 @@ const CarForm: React.FC<FormProps> = ({ initialformValues = initialFormState, me
             <FormField label="Model" id="model" name="model" value={formValues.model} onChange={handleInputChange} />
             <FormField label="Numer Vin" id="vinNumer" name="vinNumer" value={formValues.vinNumer} onChange={handleInputChange} />
             <FormField label="Numer rejestracyjny" id="registrationNumber" name="registrationNumber" value={formValues.registrationNumber} onChange={handleInputChange} />
-            <FormField label="Kategoria" id="category" name="category" value={formValues.category} onChange={handleInputChange} />
+            <FormFieldSelect options={drivingLicenseCategories} label="Kategoria" id="category" name="category" value={formValues.category} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Moc" id="horsepower" name="horsepower" value={formValues.horsepower} onChange={handleInputChange} />
             <FormField label="Ilość miejsc" id="countPlace" name="countPlace" value={formValues.countPlace} onChange={handleInputChange} />
             <FormField label="Cena /dzień" id="priceForDay" name="priceForDay" value={formValues.priceForDay} onChange={handleInputChange} />

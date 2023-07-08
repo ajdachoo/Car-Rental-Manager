@@ -45,6 +45,73 @@ const yesNoOptions: formSelectOptionProps[] = [
         value: 'false',
     }];
 
+const drivingLicenseCategories: formSelectOptionProps[] = [
+    {
+        option: 'AM',
+        value: 'AM',
+    },
+    {
+        option: 'A1',
+        value: 'A1',
+    },
+    {
+        option: 'A2',
+        value: 'A2',
+    },
+    {
+        option: 'A',
+        value: 'A',
+    },
+    {
+        option: 'B1',
+        value: 'B1',
+    },
+    {
+        option: 'B',
+        value: 'B',
+    },
+    {
+        option: 'C1',
+        value: 'C1',
+    },
+    {
+        option: 'C',
+        value: 'C',
+    },
+    {
+        option: 'D1',
+        value: 'D1',
+    },
+    {
+        option: 'D',
+        value: 'D',
+    },
+    {
+        option: 'BE',
+        value: 'BE',
+    },
+    {
+        option: 'C1E',
+        value: 'C1E',
+    },
+    {
+        option: 'CE',
+        value: 'CE',
+    },
+    {
+        option: 'D1E',
+        value: 'D1E',
+    },
+    {
+        option: 'DE',
+        value: 'DE',
+    },
+    {
+        option: 'T',
+        value: 'T',
+    },
+];
+
 const formValuesToClientProps = (formValues: formValuesProps): ClientPutPostProps => {
     return { ...formValues, isBlocked: (formValues.isBlocked === 'true') };
 };
@@ -98,7 +165,7 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
             <FormField label="Nr paszportu/pesel" id="peselOrPassportNumber" name="peselOrPassportNumber" value={formValues.peselOrPassportNumber} onChange={handleInputChange} />
             <FormField type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
             <FormField type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
-            <FormField label="Kategoria prawa jazdy" id="drivingLicenseCategory" name="drivingLicenseCategory" value={formValues.drivingLicenseCategory} onChange={handleInputChange} />
+            <FormFieldSelect options={drivingLicenseCategories} label="Kategoria prawa jazdy" id="drivingLicenseCategory" name="drivingLicenseCategory" value={formValues.drivingLicenseCategory} onChange={handleInputChange}></FormFieldSelect>
             <FormFieldSelect options={yesNoOptions} label="Zablokowany" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</FormButton>
