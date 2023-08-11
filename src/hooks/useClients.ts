@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import API from './API';
+import { DrivingLicenseCategoriesEnum } from './useCars';
 
 export const useClients = () => {
     const getClients = useCallback(async () => {
@@ -60,7 +61,7 @@ export interface ClientProps {
     phoneNumber: string;
     email: string;
     isBlocked: boolean;
-    drivingLicenseCategories: string[];
+    drivingLicenseCategories: DrivingLicenseCategoriesEnum[];
     comments: string;
 };
 

@@ -13,6 +13,10 @@ interface ClientsTableRowProps {
 const ClientTableRow: React.FC<ClientsTableRowProps> = ({ index, handleDeleteClient, clientData: { id, name, surname, peselOrPassportNumber, email, phoneNumber, drivingLicenseCategories, isBlocked, comments } }) => {
     const navigate = useNavigate();
 
+    const getStatusComponent = () => {
+        return isBlocked ? <StyledTd $status='warning'>Zablokowany</StyledTd> : <StyledTd $status='succes'>OK</StyledTd>;
+    };
+
     return (
         <StyledTr>
             <StyledTd>{`${index + 1}.`}</StyledTd>
@@ -23,7 +27,7 @@ const ClientTableRow: React.FC<ClientsTableRowProps> = ({ index, handleDeleteCli
             <StyledTd>{email}</StyledTd>
             <StyledTd>{phoneNumber}</StyledTd>
             <StyledTd>{drivingLicenseCategories.join(',')}</StyledTd>
-            <StyledTd>{isBlocked ? 'Tak' : 'Nie'}</StyledTd>
+            {getStatusComponent()}
             <StyledTd>{comments}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteClient(id)}>Usuń</StyledButton></StyledTd>
             <StyledTd><StyledButton onClick={() => navigate(`/editClient/${id}`)}>Edytuj</StyledButton></StyledTd>

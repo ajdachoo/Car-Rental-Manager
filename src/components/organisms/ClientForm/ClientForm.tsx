@@ -6,6 +6,7 @@ import { FormButton } from "components/molecules/FormField/Form.styles";
 import { ClientPutPostProps, useClients } from "hooks/useClients";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
+import { DrivingLicenseCategoriesEnum } from "hooks/useCars";
 
 interface FormProps {
     initialformValues?: formValuesProps;
@@ -35,80 +36,80 @@ const initialFormState: formValuesProps = {
     comments: ''
 };
 
-const yesNoOptions: formSelectOptionProps[] = [
+const statusOptions: formSelectOptionProps[] = [
     {
-        option: 'Tak',
-        value: 'true',
+        option: 'OK',
+        value: 'false',
     },
     {
-        option: 'Nie',
-        value: 'false',
+        option: 'Zablokowany',
+        value: 'true',
     }];
 
 const drivingLicenseCategories: formSelectOptionProps[] = [
     {
-        option: 'AM',
-        value: 'AM',
+        option: DrivingLicenseCategoriesEnum.AM,
+        value: DrivingLicenseCategoriesEnum.AM,
     },
     {
-        option: 'A1',
-        value: 'A1',
+        option: DrivingLicenseCategoriesEnum.A1,
+        value: DrivingLicenseCategoriesEnum.A1,
     },
     {
-        option: 'A2',
-        value: 'A2',
+        option: DrivingLicenseCategoriesEnum.A2,
+        value: DrivingLicenseCategoriesEnum.A2,
     },
     {
-        option: 'A',
-        value: 'A',
+        option: DrivingLicenseCategoriesEnum.A,
+        value: DrivingLicenseCategoriesEnum.A,
     },
     {
-        option: 'B1',
-        value: 'B1',
+        option: DrivingLicenseCategoriesEnum.B1,
+        value: DrivingLicenseCategoriesEnum.B1,
     },
     {
-        option: 'B',
-        value: 'B',
+        option: DrivingLicenseCategoriesEnum.B,
+        value: DrivingLicenseCategoriesEnum.B,
     },
     {
-        option: 'C1',
-        value: 'C1',
+        option: DrivingLicenseCategoriesEnum.C1,
+        value: DrivingLicenseCategoriesEnum.C1,
     },
     {
-        option: 'C',
-        value: 'C',
+        option: DrivingLicenseCategoriesEnum.C,
+        value: DrivingLicenseCategoriesEnum.C,
     },
     {
-        option: 'D1',
-        value: 'D1',
+        option: DrivingLicenseCategoriesEnum.D1,
+        value: DrivingLicenseCategoriesEnum.D1,
     },
     {
-        option: 'D',
-        value: 'D',
+        option: DrivingLicenseCategoriesEnum.D,
+        value: DrivingLicenseCategoriesEnum.D,
     },
     {
-        option: 'BE',
-        value: 'BE',
+        option: DrivingLicenseCategoriesEnum.BE,
+        value: DrivingLicenseCategoriesEnum.BE,
     },
     {
-        option: 'C1E',
-        value: 'C1E',
+        option: DrivingLicenseCategoriesEnum.C1E,
+        value: DrivingLicenseCategoriesEnum.C1E,
     },
     {
-        option: 'CE',
-        value: 'CE',
+        option: DrivingLicenseCategoriesEnum.CE,
+        value: DrivingLicenseCategoriesEnum.CE,
     },
     {
-        option: 'D1E',
-        value: 'D1E',
+        option: DrivingLicenseCategoriesEnum.D1E,
+        value: DrivingLicenseCategoriesEnum.D1E,
     },
     {
-        option: 'DE',
-        value: 'DE',
+        option: DrivingLicenseCategoriesEnum.DE,
+        value: DrivingLicenseCategoriesEnum.DE,
     },
     {
-        option: 'T',
-        value: 'T',
+        option: DrivingLicenseCategoriesEnum.T,
+        value: DrivingLicenseCategoriesEnum.T,
     },
 ];
 
@@ -170,7 +171,7 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
             <FormField type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
             <FormField type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
             <FormField label="Kategoria prawa jazdy" id="drivingLicenseCategories" name="drivingLicenseCategories" value={formValues.drivingLicenseCategories} onChange={handleInputChange} />
-            <FormFieldSelect options={yesNoOptions} label="Zablokowany" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
+            <FormFieldSelect options={statusOptions} label="Status" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</FormButton>
         </ViewWrapper>
