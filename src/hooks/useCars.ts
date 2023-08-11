@@ -57,29 +57,60 @@ export interface CarProps {
     id: number,
     mark: string,
     model: string,
-    transmission: string,
+    transmission: TransmissionEnum,
     enginePower: number,
-    drivingLicenseCategory: string,
+    drivingLicenseCategory: DrivingLicenseCategoriesEnum,
     numberOfSeats: number,
     pricePerDay: number,
     registrationNumber: string,
     vin: string,
-    status: string,
+    status: CarStatusEnum,
     comments: string
 };
 
 export interface CarPutPostProps {
     mark: string,
     model: string,
-    transmission: string,
+    transmission: TransmissionEnum,
     enginePower: number,
-    drivingLicenseCategory: string,
+    drivingLicenseCategory: DrivingLicenseCategoriesEnum,
     numberOfSeats: number,
     pricePerDay: number,
     registrationNumber: string,
     vin: string,
-    status: string,
+    status: CarStatusEnum,
     comments: string
+}
+
+export enum TransmissionEnum {
+    Authomatic = 'Authomatic',
+    Manual = 'Manual'
+}
+
+export enum CarStatusEnum {
+    OutOfOrder = 'OutOfOrder',
+    InService = 'InService',
+    Rented = 'Rented',
+    Avaliable = 'Avaliable'
+}
+
+export enum DrivingLicenseCategoriesEnum {
+    AM = 'AM',
+    A1 = 'A1',
+    A2 = 'A2',
+    A = 'A',
+    B1 = 'B1',
+    B = 'B',
+    C1 = 'C1',
+    C = 'C',
+    D1 = 'D1',
+    D = 'D',
+    BE = 'BE',
+    C1E = 'C1E',
+    CE = 'CE',
+    D1E = 'D1E',
+    DE = 'DE',
+    T = 'T'
 }
 
 /*const api = axios.create({

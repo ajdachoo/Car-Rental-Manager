@@ -3,7 +3,7 @@ import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper.styles
 import { Title } from "components/molecules/FormField/Form.styles";
 import { FormField, FormFieldSelect, formSelectOptionProps } from "components/molecules/FormField/FormField";
 import { FormButton } from "components/molecules/FormField/Form.styles";
-import { CarPutPostProps, useCars } from "hooks/useCars";
+import { CarPutPostProps, CarStatusEnum, DrivingLicenseCategoriesEnum, TransmissionEnum, useCars } from "hooks/useCars";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 
@@ -16,119 +16,119 @@ interface FormProps {
 export interface formValuesProps {
     mark: string,
     model: string,
-    transmission: string,
+    transmission: TransmissionEnum,
     enginePower: string,
-    drivingLicenseCategory: string,
+    drivingLicenseCategory: DrivingLicenseCategoriesEnum,
     numberOfSeats: string,
     pricePerDay: string,
     registrationNumber: string,
     vin: string,
-    status: string,
+    status: CarStatusEnum,
     comments: string
 };
 
 const initialFormState: formValuesProps = {
     mark: '',
     model: '',
-    transmission: 'Authomatic',
+    transmission: TransmissionEnum.Authomatic,
     enginePower: '',
-    drivingLicenseCategory: 'AM',
+    drivingLicenseCategory: DrivingLicenseCategoriesEnum.AM,
     numberOfSeats: '',
     pricePerDay: '',
     registrationNumber: '',
     vin: '',
-    status: 'Avaliable',
+    status: CarStatusEnum.Avaliable,
     comments: ''
 };
 
 const CarStatusOptions: formSelectOptionProps[] = [
     {
         option: 'Dostępny',
-        value: 'Avaliable',
-    },
-    {
-        option: 'Wynajęty',
-        value: 'Rented',
+        value: CarStatusEnum.Avaliable,
     },
     {
         option: 'Niesprawny',
-        value: 'OutOfOrder',
+        value: CarStatusEnum.OutOfOrder,
+    },
+    {
+        option: 'Serwisowany',
+        value: CarStatusEnum.InService
     }];
 
 const transmissionOptions: formSelectOptionProps[] = [
     {
         option: 'Automatyczna',
-        value: 'Authomatic',
+        value: TransmissionEnum.Authomatic,
     },
     {
         option: 'Manualna',
-        value: 'Manual',
+        value: TransmissionEnum.Manual,
     }];
 
 const drivingLicenseCategories: formSelectOptionProps[] = [
     {
-        option: 'AM',
-        value: 'AM',
+        option: DrivingLicenseCategoriesEnum.AM,
+        value: DrivingLicenseCategoriesEnum.AM,
     },
     {
-        option: 'A1',
-        value: 'A1',
+        option: DrivingLicenseCategoriesEnum.A1,
+        value: DrivingLicenseCategoriesEnum.A1,
     },
     {
-        option: 'A2',
-        value: 'A2',
+        option: DrivingLicenseCategoriesEnum.A2,
+        value: DrivingLicenseCategoriesEnum.A2,
     },
     {
-        option: 'A',
-        value: 'A',
+        option: DrivingLicenseCategoriesEnum.A,
+        value: DrivingLicenseCategoriesEnum.A,
     },
     {
-        option: 'B1',
-        value: 'B1',
+        option: DrivingLicenseCategoriesEnum.B1,
+        value: DrivingLicenseCategoriesEnum.B1,
     },
     {
-        option: 'B',
-        value: 'B',
+        option: DrivingLicenseCategoriesEnum.B,
+        value: DrivingLicenseCategoriesEnum.B,
     },
     {
-        option: 'C1',
-        value: 'C1',
+        option: DrivingLicenseCategoriesEnum.C1,
+        value: DrivingLicenseCategoriesEnum.C1,
     },
     {
-        option: 'C',
-        value: 'C',
+        option: DrivingLicenseCategoriesEnum.C,
+        value: DrivingLicenseCategoriesEnum.C,
     },
     {
-        option: 'D1',
-        value: 'D1',
+        option: DrivingLicenseCategoriesEnum.D1,
+        value: DrivingLicenseCategoriesEnum.D1,
     },
     {
-        option: 'D',
-        value: 'D',
+        option: DrivingLicenseCategoriesEnum.D,
+        value: DrivingLicenseCategoriesEnum.D,
     },
     {
-        option: 'BE',
-        value: 'BE',
+        option: DrivingLicenseCategoriesEnum.BE,
+        value: DrivingLicenseCategoriesEnum.BE,
     },
     {
-        option: 'C1E',
-        value: 'C1E',
+        option: DrivingLicenseCategoriesEnum.C1E,
+        value: DrivingLicenseCategoriesEnum.C1E,
     },
     {
-        option: 'CE',
-        value: 'CE',
+        option: DrivingLicenseCategoriesEnum.CE,
+        value: DrivingLicenseCategoriesEnum.CE,
     },
     {
-        option: 'D1E',
-        value: 'D1E',
+        option: DrivingLicenseCategoriesEnum.D1E,
+        value: DrivingLicenseCategoriesEnum.D1E,
     },
     {
-        option: 'DE',
-        value: 'DE',
+        option: DrivingLicenseCategoriesEnum.DE,
+        value: DrivingLicenseCategoriesEnum.DE,
     },
     {
-        option: 'T',
-        value: 'T',
+        option: DrivingLicenseCategoriesEnum.T,
+        value: DrivingLicenseCategoriesEnum.T,
     },
 ];
 
@@ -137,7 +137,7 @@ const formValuesToCarProps = (formValues: formValuesProps): CarPutPostProps => {
         ...formValues,
         enginePower: parseInt(formValues.enginePower),
         pricePerDay: parseInt(formValues.pricePerDay),
-        numberOfSeats: parseInt(formValues.numberOfSeats)
+        numberOfSeats: parseInt(formValues.numberOfSeats),
     };
 };
 
