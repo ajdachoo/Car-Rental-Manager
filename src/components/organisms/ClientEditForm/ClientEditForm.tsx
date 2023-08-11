@@ -4,7 +4,11 @@ import { useClients, ClientProps } from "hooks/useClients";
 import ClientForm, { formValuesProps } from "../ClientForm/ClientForm";
 
 const ClientPropsToFormValues = (client: ClientProps): formValuesProps => {
-    return { ...client, isBlocked: client.isBlocked.toString() };
+    return {
+        ...client,
+        isBlocked: client.isBlocked.toString(),
+        drivingLicenseCategories: client.drivingLicenseCategories.join(','),
+    };
 };
 
 const ClientEditForm = () => {

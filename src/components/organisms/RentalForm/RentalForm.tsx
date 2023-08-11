@@ -11,35 +11,24 @@ import { useClients, ClientProps } from "hooks/useClients";
 
 interface FormProps {
     initialformValues?: formValuesProps;
-    method: 'add' | 'edit';
-    rentalEditID?: number;
 };
 
 export interface formValuesProps {
     carId: string;
     clientId: string;
-    hireDate: string;
+    userId: string;
+    rentalDate: string;
     expectedDateOfReturn: string;
-    dateOfReturn: string;
-    comment: string;
+    comments: string;
 };
 
 const initialFormState: formValuesProps = {
     carId: '',
     clientId: '',
-    hireDate: '',
+    userId: '1',
+    rentalDate: '',
     expectedDateOfReturn: '',
-    dateOfReturn: '',
-    comment: '',
-};
-
-const dateToISO8601 = (date: string): string => {
-    if (date !== '') {
-        let result = new Date(date);
-        return result.toISOString();
-    } else {
-        return '';
-    }
+    comments: '',
 };
 
 const formValuesToRentalProps = (formValues: formValuesProps): RentalPutPostProps => {
@@ -47,18 +36,18 @@ const formValuesToRentalProps = (formValues: formValuesProps): RentalPutPostProp
         ...formValues,
         carId: parseInt(formValues.carId),
         clientId: parseInt(formValues.clientId),
-        hireDate: dateToISO8601(formValues.hireDate),
-        expectedDateOfReturn: dateToISO8601(formValues.expectedDateOfReturn),
-        dateOfReturn: dateToISO8601(formValues.dateOfReturn)
+        userId: parseInt(formValues.userId),
+        rentalDate: new Date(formValues.rentalDate).toISOString(),
+        expectedDateOfReturn: new Date(formValues.expectedDateOfReturn).toISOString(),
     };
 };
 
 const clientsToOptions = (clients: ClientProps[]): formSelectOptionProps[] => {
     let options: formSelectOptionProps[] = [];
 
-    clients.forEach(({ id, firstName, lastName, peselOrPassportNumber, isBlocked }) => {
+    clients.forEach(({ id, name, surname, peselOrPassportNumber, isBlocked }) => {
         if (!isBlocked) {
-            options.push({ option: `${firstName} ${lastName} ${peselOrPassportNumber}`, value: id })
+            options.push({ option: `${name} ${surname} ${peselOrPassportNumber}`, value: id })
         };
     });
     return options.length > 0 ? options : [{ option: 'Brak', value: 0 }];
@@ -67,22 +56,22 @@ const clientsToOptions = (clients: ClientProps[]): formSelectOptionProps[] => {
 const carsToOptions = (cars: CarProps[]): formSelectOptionProps[] => {
     let options: formSelectOptionProps[] = [];
 
-    cars.forEach(({ id, availableNow, efficientNow, mark, model, registrationNumber, automaticTransmission, horsepower, countPlace, priceForDay }) => {
-        if (availableNow && efficientNow) {
-            options.push({ option: `${mark} ${model} ${registrationNumber} ${horsepower}KM ${automaticTransmission ? 'Automatyczna' : 'Manualna'} ${countPlace}msc. ${priceForDay.toFixed(2)} zł./dzień`, value: id })
+    cars.forEach(({ id, status, mark, model, registrationNumber, transmission, enginePower, numberOfSeats, pricePerDay }) => {
+        if (status === 'Avaliable') {
+            options.push({ option: `${mark} ${model} ${registrationNumber} ${enginePower}KM ${transmission} ${numberOfSeats}msc. ${pricePerDay.toFixed(2)} zł./dzień`, value: id })
         };
     });
     return options.length > 0 ? options : [{ option: 'Brak', value: 0 }];
 };
 
-const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState, method, rentalEditID }) => {
+const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState }) => {
     const [clients, setClients] = useState<ClientProps[]>();
     const [cars, setCars] = useState<CarProps[]>();
     const { getClients } = useClients();
     const { getCars } = useCars();
 
     const [formValues, setFormValues] = useState<formValuesProps>(initialformValues);
-    const { postRental, putRental } = useRentals();
+    const { postRental } = useRentals();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -116,32 +105,15 @@ const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
         }
     };
 
-    const handleEditRental = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (rentalEditID) {
-            const formatRental = formValuesToRentalProps(formValues)
-            const response = await putRental(formatRental, rentalEditID);
-            if (isAxiosError(response)) {
-                alert('niepoprawne dane!');
-            } else {
-                setFormValues(initialFormState);
-                navigate('/rentals');
-            }
-        } else {
-            alert('niepoprawne dane!');
-        }
-    };
-
     return (
-        <ViewWrapper as="form" onSubmit={method === 'add' ? handleAddRental : handleEditRental}>
-            <Title>{method === 'add' ? 'Nowe wypożyczenie' : 'Edytuj wypożyczenie'}</Title>
+        <ViewWrapper as="form" onSubmit={handleAddRental}>
+            <Title>Nowe wypożyczenie</Title>
             <FormFieldSelect options={cars ? carsToOptions(cars) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz pojazd" id="carId" name="carId" value={formValues.carId} onChange={handleInputChange}></FormFieldSelect>
             <FormFieldSelect options={clients ? clientsToOptions(clients) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz klienta" id="clientId" name="clientId" value={formValues.clientId} onChange={handleInputChange}></FormFieldSelect>
-            <FormFieldDate label="Data od" id="hireDate" name="hireDate" value={formValues.hireDate} onChange={handleInputChange} />
+            <FormFieldDate label="Data od" id="rentalDate" name="rentalDate" value={formValues.rentalDate} onChange={handleInputChange} />
             <FormFieldDate label="Data do" id="expectedDateOfReturn" name="expectedDateOfReturn" value={formValues.expectedDateOfReturn} onChange={handleInputChange} />
-            <FormFieldDate label="Data zwrotu" id="dateOfReturn" name="dateOfReturn" value={formValues.dateOfReturn} onChange={handleInputChange} />
-            <FormField label="Komentarz" id="comment" name="comment" value={formValues.comment} onChange={handleInputChange} />
-            <FormButton type="submit">{method === 'add' ? 'Stwórz' : 'Zatwierdź'}</FormButton>
+            <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
+            <FormButton type="submit">Stwórz'</FormButton>
         </ViewWrapper>
     );
 };

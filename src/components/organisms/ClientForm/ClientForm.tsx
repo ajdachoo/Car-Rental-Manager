@@ -14,25 +14,25 @@ interface FormProps {
 };
 
 export interface formValuesProps {
-    firstName: string;
-    lastName: string;
+    name: string;
+    surname: string;
     peselOrPassportNumber: string;
-    email: string;
     phoneNumber: string;
-    drivingLicenseCategory: string;
+    email: string;
     isBlocked: string;
+    drivingLicenseCategories: string;
     comments: string;
 };
 
 const initialFormState: formValuesProps = {
-    firstName: '',
-    lastName: '',
+    name: '',
+    surname: '',
     peselOrPassportNumber: '',
-    email: '',
     phoneNumber: '',
-    drivingLicenseCategory: '',
+    email: '',
     isBlocked: 'false',
-    comments: '',
+    drivingLicenseCategories: '',
+    comments: ''
 };
 
 const yesNoOptions: formSelectOptionProps[] = [
@@ -113,7 +113,11 @@ const drivingLicenseCategories: formSelectOptionProps[] = [
 ];
 
 const formValuesToClientProps = (formValues: formValuesProps): ClientPutPostProps => {
-    return { ...formValues, isBlocked: (formValues.isBlocked === 'true') };
+    return {
+        ...formValues,
+        isBlocked: (formValues.isBlocked === 'true'),
+        drivingLicenseCategories: formValues.drivingLicenseCategories.split(','),
+    };
 };
 
 
@@ -160,12 +164,12 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
     return (
         <ViewWrapper as="form" onSubmit={method === 'add' ? handleAddClient : handleEditClient}>
             <Title>{method === 'add' ? 'Dodaj nowego klienta' : 'Edytuj dane klienta'}</Title>
-            <FormField label="Imię" id="firstName" name="firstName" value={formValues.firstName} onChange={handleInputChange} />
-            <FormField label="Nazwisko" id="lastName" name="lastName" value={formValues.lastName} onChange={handleInputChange} />
+            <FormField label="Imię" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
+            <FormField label="Nazwisko" id="surname" name="surname" value={formValues.surname} onChange={handleInputChange} />
             <FormField label="Nr paszportu/pesel" id="peselOrPassportNumber" name="peselOrPassportNumber" value={formValues.peselOrPassportNumber} onChange={handleInputChange} />
             <FormField type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
             <FormField type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
-            <FormFieldSelect options={drivingLicenseCategories} label="Kategoria prawa jazdy" id="drivingLicenseCategory" name="drivingLicenseCategory" value={formValues.drivingLicenseCategory} onChange={handleInputChange}></FormFieldSelect>
+            <FormField label="Kategoria prawa jazdy" id="drivingLicenseCategories" name="drivingLicenseCategories" value={formValues.drivingLicenseCategories} onChange={handleInputChange} />
             <FormFieldSelect options={yesNoOptions} label="Zablokowany" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</FormButton>

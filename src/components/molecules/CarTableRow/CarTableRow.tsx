@@ -10,7 +10,7 @@ interface CarTableRowProps {
     index: number;
 }
 
-const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carData: { id, mark, model, automaticTransmission, horsepower, category, countPlace, priceForDay, registrationNumber, vinNumer, availableNow, efficientNow } }) => {
+const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carData: { id, mark, model, transmission, enginePower, drivingLicenseCategory, numberOfSeats, pricePerDay, registrationNumber, vin, status } }) => {
     const navigate = useNavigate();
 
     return (
@@ -19,15 +19,14 @@ const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carDa
             <StyledTd>{id}</StyledTd>
             <StyledTd>{mark}</StyledTd>
             <StyledTd>{model}</StyledTd>
-            <StyledTd>{automaticTransmission ? 'automatyczna' : 'manualna'}</StyledTd>
-            <StyledTd>{`${horsepower} KM`}</StyledTd>
-            <StyledTd>{category}</StyledTd>
-            <StyledTd>{countPlace}</StyledTd>
-            <StyledTd>{`${priceForDay.toFixed(2)} zł.`}</StyledTd>
+            <StyledTd>{transmission}</StyledTd>
+            <StyledTd>{`${enginePower} KM`}</StyledTd>
+            <StyledTd>{drivingLicenseCategory}</StyledTd>
+            <StyledTd>{numberOfSeats}</StyledTd>
+            <StyledTd>{`${pricePerDay.toFixed(2)} zł.`}</StyledTd>
             <StyledTd>{registrationNumber}</StyledTd>
-            <StyledTd>{vinNumer}</StyledTd>
-            <StyledTd>{availableNow ? 'Tak' : 'Nie'}</StyledTd>
-            <StyledTd>{efficientNow ? 'Tak' : 'Nie'}</StyledTd>
+            <StyledTd>{vin}</StyledTd>
+            <StyledTd>{status}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteCar(id)}>Usuń</StyledButton></StyledTd>
             <StyledTd><StyledButton onClick={() => navigate(`/editCar/${id}`)}>Edytuj</StyledButton></StyledTd>
         </StyledTr>

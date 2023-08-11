@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyledTr, StyledTd } from './RentalTableRow.styles'
-import { RentalProp } from 'hooks/useRentals';
+import { RentalProps } from 'hooks/useRentals';
 import { StyledButton } from 'components/atoms/Button/Button';
 
 interface RentalsTableRowProps {
-    rentalData: RentalProp;
+    rentalData: RentalProps;
     index: number;
     handleDeleteRental: Function;
 }
@@ -19,54 +19,40 @@ const getDiffDate = (date1: Date, date2: Date) => {
     return diffhours;
 };
 
-const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, index, rentalData: { id, carId, carMark, carModel, registrationNumber, clientId, firstName, lastName, peselOrPassportNumber, hireDate, expectedDateOfReturn, dateOfReturn, comment, status, price } }) => {
+const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, index, rentalData: { id, car: { id: carId, mark, model, registrationNumber }, client: { id: clientId, name, surname, peselOrPassportNumber }, rentalDate, expectedDateOfReturn, dateOfReturn, comments, status, amount } }) => {
 
-    const hireDateFormat = new Date(hireDate);
+    const hireDateFormat = new Date(rentalDate);
     const expectedDateOfReturnFormat = new Date(expectedDateOfReturn);
     const dateOfReturnFormat = new Date(dateOfReturn);
     const currentDate = new Date()
 
-    const getStatusComponent = () => {
+    /*const getStatusComponent = () => {
         switch (status) {
             case -1: return <StyledTd $status='warning'>Opóźnienie: {getDiffDate(currentDate, expectedDateOfReturnFormat) + ' h.'} </StyledTd>;
             case 0: return <StyledTd $status='inProgress'>W trakcie...</StyledTd>;
             case 1: return <StyledTd $status='succes'>Zwrócono: {getFormatDate(dateOfReturnFormat)}</StyledTd>;
         };
-    };
+    }; */
 
     return (
         <StyledTr>
             <StyledTd>{`${index + 1}.`}</StyledTd>
             <StyledTd>{id}</StyledTd>
             <StyledTd>{carId}</StyledTd>
-            <StyledTd>{carMark}</StyledTd>
-            <StyledTd>{carModel}</StyledTd>
+            <StyledTd>{mark}</StyledTd>
+            <StyledTd>{model}</StyledTd>
             <StyledTd>{registrationNumber}</StyledTd>
             <StyledTd>{clientId}</StyledTd>
-            <StyledTd>{firstName}</StyledTd>
-            <StyledTd>{lastName}</StyledTd>
+            <StyledTd>{name}</StyledTd>
+            <StyledTd>{surname}</StyledTd>
             <StyledTd>{peselOrPassportNumber}</StyledTd>
             <StyledTd>{getFormatDate(hireDateFormat) + ' do ' + getFormatDate(expectedDateOfReturnFormat)}</StyledTd>
-            <StyledTd>{getStatusComponent()}</StyledTd>
-            <StyledTd >{`${price.toFixed(2)} zł.`}</StyledTd>
-            <StyledTd >{comment}</StyledTd>
+            <StyledTd>{status}</StyledTd>
+            <StyledTd >{`${amount.toFixed(2)} zł.`}</StyledTd>
+            <StyledTd >{comments}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteRental(id)}>Usuń</StyledButton></StyledTd>
         </StyledTr>
     );
 };
 
 export default RentalTableRow;
-
-/*"id": 0,
-"carId": 0,
-"carMark": "string",
-"carModel": "string",
-"registrationNumber": "string",
-"clientId": 0,
-"firstName": "string",
-"lastName": "string",
-"peselOrPassportNumber": "string",
-"hireDate": "2023-06-24T18:03:50.280Z",
-"expectedDateOfReturn": "2023-06-24T18:03:50.280Z",
-"dateOfReturn": "2023-06-24T18:03:50.280Z",
-"comment": "string" */

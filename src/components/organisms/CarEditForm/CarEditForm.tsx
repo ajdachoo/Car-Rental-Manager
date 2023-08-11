@@ -6,12 +6,9 @@ import CarForm, { formValuesProps } from "../CarForm/CarForm";
 const CarPropsToFormValues = (car: CarProps): formValuesProps => {
     return {
         ...car,
-        efficientNow: car.efficientNow.toString(),
-        availableNow: car.availableNow.toString(),
-        horsepower: car.horsepower.toString(),
-        countPlace: car.countPlace.toString(),
-        priceForDay: car.priceForDay.toString(),
-        automaticTransmission: car.automaticTransmission.toString()
+        enginePower: car.enginePower.toString(),
+        numberOfSeats: car.numberOfSeats.toString(),
+        pricePerDay: car.pricePerDay.toString(),
     };
 };
 

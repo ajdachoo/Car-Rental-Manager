@@ -54,23 +54,23 @@ export const useClients = () => {
 
 export interface ClientProps {
     id: number;
-    firstName: string;
-    lastName: string;
+    name: string;
+    surname: string;
     peselOrPassportNumber: string;
-    email: string;
     phoneNumber: string;
-    drivingLicenseCategory: string;
+    email: string;
     isBlocked: boolean;
+    drivingLicenseCategories: string[];
     comments: string;
 };
 
 export interface ClientPutPostProps {
-    firstName: string;
-    lastName: string;
+    name: string;
+    surname: string;
     peselOrPassportNumber: string;
-    email: string;
     phoneNumber: string;
-    drivingLicenseCategory: string;
+    email: string;
     isBlocked: boolean;
+    drivingLicenseCategories: string[];
     comments: string;
 };

@@ -1,10 +1,13 @@
 import { useCallback } from 'react';
 import API from './API';
+import { CarProps } from './useCars';
+import { ClientProps } from './useClients';
+import { UserProps } from './useUsers';
 
 export const useRentals = () => {
     const getRentals = useCallback(async () => {
         try {
-            const result = await API.get<RentalProp[]>('/hires');
+            const result = await API.get<RentalProps[]>('/rentals');
             return result.data;
         } catch (e) {
             console.log(e);
@@ -13,7 +16,7 @@ export const useRentals = () => {
 
     const deleteRental = useCallback(async (id: number) => {
         try {
-            const result = await API.delete(`/hires/${id}`);
+            const result = await API.delete(`/rentals/${id}`);
             return result.data;
         } catch (e) {
             console.log(e);
@@ -23,10 +26,7 @@ export const useRentals = () => {
     const postRental = useCallback(async (rental: RentalPutPostProps) => {
         try {
             console.log(rental);
-            if (rental.dateOfReturn === '') {
-                rental.dateOfReturn = null;
-            }
-            const result = await API.post(`/hires`, rental);
+            const result = await API.post(`/rentals`, rental);
             return result.data;
         } catch (e) {
             console.log(e);
@@ -36,7 +36,7 @@ export const useRentals = () => {
 
     const putRental = useCallback(async (rental: RentalPutPostProps, rentalID: number) => {
         try {
-            const result = await API.put(`/hires/${rentalID}`, rental);
+            const result = await API.put(`rentals/${rentalID}`, rental);
             return result.data;
         } catch (e) {
             console.log(e);
@@ -46,7 +46,7 @@ export const useRentals = () => {
 
     const getRental = useCallback(async (id: number) => {
         try {
-            const result = await API.get(`/hires/${id}`);
+            const result = await API.get(`/rentals/${id}`);
             return result.data;
         } catch (e) {
             console.log(e);
@@ -56,29 +56,24 @@ export const useRentals = () => {
     return { getRentals, deleteRental, postRental, putRental, getRental };
 };
 
-export interface RentalProp {
+export interface RentalProps {
     id: number;
-    carId: number;
-    carMark: string;
-    carModel: string;
-    registrationNumber: string;
-    clientId: number;
-    firstName: string;
-    lastName: string;
-    peselOrPassportNumber: string;
-    hireDate: string;
+    car: CarProps;
+    client: ClientProps;
+    user: UserProps
+    rentalDate: string;
     expectedDateOfReturn: string;
+    status: string;
+    amount: number;
+    comments: string;
     dateOfReturn: string;
-    comment: null | string;
-    status: -1 | 0 | 1;
-    price: number;
 };
 
 export interface RentalPutPostProps {
     carId: number;
     clientId: number;
-    hireDate: string;
+    userId: number;
+    rentalDate: string;
     expectedDateOfReturn: string;
-    dateOfReturn: string | null;
-    comment: null | string;
+    comments: null | string;
 };

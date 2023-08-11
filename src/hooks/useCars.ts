@@ -22,6 +22,7 @@ export const useCars = () => {
 
     const postCar = useCallback(async (car: CarPutPostProps) => {
         try {
+            console.log(car);
             const result = await API.post(`/cars`, car);
             return result.data;
         } catch (e) {
@@ -53,34 +54,32 @@ export const useCars = () => {
 };
 
 export interface CarProps {
-    id: number
-    registrationNumber: string;
-    vinNumer: string;
-    mark: string;
-    model: string;
-    automaticTransmission: boolean;
-    horsepower: number;
-    countPlace: number;
-    category: string;
-    efficientNow: boolean;
-    availableNow: boolean;
-    priceForDay: number;
-    comments: string;
+    id: number,
+    mark: string,
+    model: string,
+    transmission: string,
+    enginePower: number,
+    drivingLicenseCategory: string,
+    numberOfSeats: number,
+    pricePerDay: number,
+    registrationNumber: string,
+    vin: string,
+    status: string,
+    comments: string
 };
 
 export interface CarPutPostProps {
-    registrationNumber: string;
-    vinNumer: string;
-    mark: string;
-    model: string;
-    automaticTransmission: boolean;
-    horsepower: number;
-    countPlace: number;
-    category: string;
-    efficientNow: boolean;
-    availableNow: boolean;
-    priceForDay: number;
-    comments: string;
+    mark: string,
+    model: string,
+    transmission: string,
+    enginePower: number,
+    drivingLicenseCategory: string,
+    numberOfSeats: number,
+    pricePerDay: number,
+    registrationNumber: string,
+    vin: string,
+    status: string,
+    comments: string
 }
 
 /*const api = axios.create({

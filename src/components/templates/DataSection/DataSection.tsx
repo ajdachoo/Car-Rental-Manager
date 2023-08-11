@@ -17,7 +17,7 @@ const DataSection: React.FC = () => {
                 <Route path='/cars' element={<CarsTable />} />
                 <Route path='/clients' element={<ClientsTable />} />
                 <Route path='/rentals' element={<RentalsTable />} />
-                <Route path='/addRental' element={<RentalForm method='add' />} />
+                <Route path='/addRental' element={<RentalForm />} />
                 <Route path='/addClient' element={<ClientForm method='add' />} />
                 <Route path='/editClient/:editClientID' element={<ClientEditForm />} />
                 <Route path='/addCar' element={<CarForm method='add' />} />

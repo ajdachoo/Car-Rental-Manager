@@ -4,7 +4,7 @@ import ClientTableRow from 'components/molecules/ClientsTableRow/ClientsTableRow
 import { useClients, ClientProps } from 'hooks/useClients';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 
-const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategoria prawa jazdy', 'Zablokowany', 'Komentarz'];
+const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategorie prawa jazdy', 'Zablokowany', 'Komentarz'];
 
 const ClientsTable: React.FC = () => {
     const [clients, setClients] = useState<ClientProps[]>();
