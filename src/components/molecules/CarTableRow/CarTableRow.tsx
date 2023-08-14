@@ -35,14 +35,14 @@ const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carDa
             <StyledTd>{id}</StyledTd>
             <StyledTd>{mark}</StyledTd>
             <StyledTd>{model}</StyledTd>
-            <StyledTd>{getTransmissionComponent()}</StyledTd>
+            {getTransmissionComponent()}
             <StyledTd>{`${enginePower} KM`}</StyledTd>
             <StyledTd>{drivingLicenseCategory}</StyledTd>
             <StyledTd>{numberOfSeats}</StyledTd>
             <StyledTd>{`${pricePerDay.toFixed(2)} zł.`}</StyledTd>
             <StyledTd>{registrationNumber}</StyledTd>
             <StyledTd>{vin}</StyledTd>
-            <StyledTd>{getCarStatusComponent()}</StyledTd>
+            {getCarStatusComponent()}
             <StyledTd><StyledButton onClick={() => handleDeleteCar(id)}>Usuń</StyledButton></StyledTd>
             <StyledTd><StyledButton onClick={() => navigate(`/editCar/${id}`)}>Edytuj</StyledButton></StyledTd>
         </StyledTr>

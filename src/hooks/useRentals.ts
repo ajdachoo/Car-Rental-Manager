@@ -63,7 +63,7 @@ export interface RentalProps {
     user: UserProps
     rentalDate: string;
     expectedDateOfReturn: string;
-    status: string;
+    status: RentalStatusEnum;
     amount: number;
     comments: string;
     dateOfReturn: string;
@@ -75,5 +75,11 @@ export interface RentalPutPostProps {
     userId: number;
     rentalDate: string;
     expectedDateOfReturn: string;
-    comments: null | string;
+    comments: string;
 };
+
+export enum RentalStatusEnum {
+    Active = 'Active',
+    Delayed = 'Delayed',
+    Finished = 'Finished',
+}

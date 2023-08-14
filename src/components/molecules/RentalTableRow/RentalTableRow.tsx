@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledTr, StyledTd } from './RentalTableRow.styles'
-import { RentalProps } from 'hooks/useRentals';
+import { RentalProps, RentalStatusEnum } from 'hooks/useRentals';
 import { StyledButton } from 'components/atoms/Button/Button';
 
 interface RentalsTableRowProps {
@@ -10,7 +10,7 @@ interface RentalsTableRowProps {
 }
 
 const getFormatDate = (date: Date): string => {
-    return `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
+    return `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
 };
 
 const getDiffDate = (date1: Date, date2: Date) => {
@@ -26,13 +26,13 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, in
     const dateOfReturnFormat = new Date(dateOfReturn);
     const currentDate = new Date()
 
-    /*const getStatusComponent = () => {
+    const getStatusComponent = () => {
         switch (status) {
-            case -1: return <StyledTd $status='warning'>Opóźnienie: {getDiffDate(currentDate, expectedDateOfReturnFormat) + ' h.'} </StyledTd>;
-            case 0: return <StyledTd $status='inProgress'>W trakcie...</StyledTd>;
-            case 1: return <StyledTd $status='succes'>Zwrócono: {getFormatDate(dateOfReturnFormat)}</StyledTd>;
+            case RentalStatusEnum.Delayed: return <StyledTd $status='warning'>Opóźnienie: {getDiffDate(currentDate, expectedDateOfReturnFormat) + ' h.'} </StyledTd>;
+            case RentalStatusEnum.Active: return <StyledTd $status='inProgress'>W trakcie...</StyledTd>;
+            case RentalStatusEnum.Finished: return <StyledTd $status='succes'>Zwrócono: {getFormatDate(dateOfReturnFormat)}</StyledTd>;
         };
-    }; */
+    };
 
     return (
         <StyledTr>
@@ -47,7 +47,7 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, in
             <StyledTd>{surname}</StyledTd>
             <StyledTd>{peselOrPassportNumber}</StyledTd>
             <StyledTd>{getFormatDate(hireDateFormat) + ' do ' + getFormatDate(expectedDateOfReturnFormat)}</StyledTd>
-            <StyledTd>{status}</StyledTd>
+            {getStatusComponent()}
             <StyledTd >{`${amount.toFixed(2)} zł.`}</StyledTd>
             <StyledTd >{comments}</StyledTd>
             <StyledTd><StyledButton onClick={() => handleDeleteRental(id)}>Usuń</StyledButton></StyledTd>

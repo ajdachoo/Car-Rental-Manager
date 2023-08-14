@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ViewWrapper } from "components/molecules/ViewWrapper/ViewWrapper.styles";
 import { Title } from "components/molecules/FormField/Form.styles";
-import { FormField, FormFieldDate, FormFieldSelect, formSelectOptionProps } from "components/molecules/FormField/FormField";
+import { FormField, FormFieldDate, FormFieldSelect, FormFieldTime, formSelectOptionProps } from "components/molecules/FormField/FormField";
 import { FormButton } from "components/molecules/FormField/Form.styles";
 import { RentalPutPostProps, useRentals } from "hooks/useRentals";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,9 @@ export interface formValuesProps {
     clientId: string;
     userId: string;
     rentalDate: string;
+    startTime: string;
     expectedDateOfReturn: string;
+    expectedReturnTime: string;
     comments: string;
 };
 
@@ -27,23 +29,26 @@ const initialFormState: formValuesProps = {
     clientId: '',
     userId: '1',
     rentalDate: '',
+    startTime: '12:00',
     expectedDateOfReturn: '',
+    expectedReturnTime: '12:00',
     comments: '',
 };
 
 const formValuesToRentalProps = (formValues: formValuesProps): RentalPutPostProps => {
+    console.log(`${formValues.expectedDateOfReturn},${formValues.expectedReturnTime}`);
     return {
-        ...formValues,
         carId: parseInt(formValues.carId),
         clientId: parseInt(formValues.clientId),
         userId: parseInt(formValues.userId),
-        rentalDate: new Date(formValues.rentalDate).toISOString(),
-        expectedDateOfReturn: new Date(formValues.expectedDateOfReturn).toISOString(),
+        rentalDate: new Date(`${formValues.rentalDate},${formValues.startTime}`).toISOString(),
+        expectedDateOfReturn: new Date(`${formValues.expectedDateOfReturn},${formValues.expectedReturnTime}`).toISOString(),
+        comments: formValues.comments,
     };
 };
 
 const clientsToOptions = (clients: ClientProps[]): formSelectOptionProps[] => {
-    let options: formSelectOptionProps[] = [];
+    let options: formSelectOptionProps[] = [{ option: 'Wybierz klienta', value: '' }];
 
     clients.forEach(({ id, name, surname, peselOrPassportNumber, isBlocked }) => {
         if (!isBlocked) {
@@ -54,7 +59,7 @@ const clientsToOptions = (clients: ClientProps[]): formSelectOptionProps[] => {
 };
 
 const carsToOptions = (cars: CarProps[]): formSelectOptionProps[] => {
-    let options: formSelectOptionProps[] = [];
+    let options: formSelectOptionProps[] = [{ option: 'Wybierz pojazd', value: '' }];
 
     cars.forEach(({ id, status, mark, model, registrationNumber, transmission, enginePower, numberOfSeats, pricePerDay }) => {
         if (status === 'Avaliable') {
@@ -111,9 +116,11 @@ const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState 
             <FormFieldSelect options={cars ? carsToOptions(cars) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz pojazd" id="carId" name="carId" value={formValues.carId} onChange={handleInputChange}></FormFieldSelect>
             <FormFieldSelect options={clients ? clientsToOptions(clients) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz klienta" id="clientId" name="clientId" value={formValues.clientId} onChange={handleInputChange}></FormFieldSelect>
             <FormFieldDate label="Data od" id="rentalDate" name="rentalDate" value={formValues.rentalDate} onChange={handleInputChange} />
+            <FormFieldTime label="Godzina wynajmu" id="startTime" name="startTime" value={formValues.startTime} onChange={handleInputChange} />
             <FormFieldDate label="Data do" id="expectedDateOfReturn" name="expectedDateOfReturn" value={formValues.expectedDateOfReturn} onChange={handleInputChange} />
+            <FormFieldTime label="Godzina zwrotu" id="expectedReturnTime" name="expectedReturnTime" value={formValues.expectedReturnTime} onChange={handleInputChange} />
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
-            <FormButton type="submit">Stwórz'</FormButton>
+            <FormButton type="submit">Stwórz</FormButton>
         </ViewWrapper>
     );
 };

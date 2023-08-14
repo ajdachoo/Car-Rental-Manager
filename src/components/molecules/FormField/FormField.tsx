@@ -53,3 +53,12 @@ export const FormFieldDate: React.FC<FormFieldProps> = ({ onChange, value, label
         </Wrapper>
     );
 };
+
+export const FormFieldTime: React.FC<FormFieldProps> = ({ onChange, value, label, name, id }) => {
+    return (
+        <Wrapper>
+            <StyledLabel htmlFor={id}>{label}</StyledLabel>
+            <StyledInput name={name} id={id} type="time" value={value} onChange={onChange}></StyledInput>
+        </Wrapper>
+    );
+};
