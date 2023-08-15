@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import { useCars, CarProps } from "hooks/useCars";
 import { useClients, ClientProps } from "hooks/useClients";
+import { getFormatDate, getFormatTime } from "components/molecules/RentalTableRow/RentalTableRow";
 
 interface FormProps {
     initialformValues?: formValuesProps;
@@ -28,8 +29,8 @@ const initialFormState: formValuesProps = {
     carId: '',
     clientId: '',
     userId: '1',
-    rentalDate: '',
-    startTime: '12:00',
+    rentalDate: getFormatDate(new Date()),
+    startTime: getFormatTime(new Date()),
     expectedDateOfReturn: '',
     expectedReturnTime: '12:00',
     comments: '',

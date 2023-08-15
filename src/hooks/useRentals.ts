@@ -20,6 +20,7 @@ export const useRentals = () => {
             return result.data;
         } catch (e) {
             console.log(e);
+            return e;
         }
     }, []);
 
@@ -46,14 +47,25 @@ export const useRentals = () => {
 
     const getRental = useCallback(async (id: number) => {
         try {
-            const result = await API.get(`/rentals/${id}`);
+            const result = await API.get<RentalProps>(`/rentals/${id}`);
             return result.data;
         } catch (e) {
             console.log(e);
+            return e;
         }
     }, []);
 
-    return { getRentals, deleteRental, postRental, putRental, getRental };
+    const getFinishRental = useCallback(async (id: number, rental: RentalFinishProps) => {
+        try {
+            const result = await API.post<number>(`/rentals/${id}/finish`, rental);
+            return result.data;
+        } catch (e) {
+            console.log(e);
+            return e;
+        }
+    }, []);
+
+    return { getRentals, deleteRental, postRental, putRental, getRental, getFinishRental };
 };
 
 export interface RentalProps {
@@ -77,6 +89,10 @@ export interface RentalPutPostProps {
     expectedDateOfReturn: string;
     comments: string;
 };
+
+export interface RentalFinishProps {
+    dateOfReturn: string;
+}
 
 export enum RentalStatusEnum {
     Active = 'Active',
