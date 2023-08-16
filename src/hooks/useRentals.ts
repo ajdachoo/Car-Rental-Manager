@@ -5,9 +5,9 @@ import { ClientProps } from './useClients';
 import { UserProps } from './useUsers';
 
 export const useRentals = () => {
-    const getRentals = useCallback(async () => {
+    const getRentals = useCallback(async (status?: RentalStatusEnum) => {
         try {
-            const result = await API.get<RentalProps[]>('/rentals');
+            const result = await API.get<RentalProps[]>('/rentals', { params: { status: status } });
             return result.data;
         } catch (e) {
             console.log(e);

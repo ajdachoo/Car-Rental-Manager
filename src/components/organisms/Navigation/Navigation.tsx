@@ -36,11 +36,11 @@ const Navigation: React.FC = () => {
             </NavSection>
             <NavSection>
                 <p>Wypożyczenia</p>
-                <StyledNavLink to="/rentals"><TableListIcon />Tabela wypożyczeń</StyledNavLink>
+                <StyledNavLink to="/rentals"><TableListIcon />Wszystkie</StyledNavLink>
                 <StyledNavLink to="/addRental"><NewIcon />Stwórz nowe</StyledNavLink>
-                <StyledNavLink to="/rentals"><SpinnerIcon />Aktywne</StyledNavLink>
-                <StyledNavLink to="/rentals"><ClockIcon />Opóźnione</StyledNavLink>
-                <StyledNavLink to="/rentals"><CheckIcon />Zakończone</StyledNavLink>
+                <StyledNavLink to="/rentalsByStatus/Active"><SpinnerIcon />Aktywne</StyledNavLink>
+                <StyledNavLink to="/rentalsByStatus/Delayed"><ClockIcon />Opóźnione</StyledNavLink>
+                <StyledNavLink to="/rentalsByStatus/Finished"><CheckIcon />Zakończone</StyledNavLink>
             </NavSection>
         </Wrapper>
     );
