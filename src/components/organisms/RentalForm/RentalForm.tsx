@@ -29,8 +29,8 @@ const initialFormState: formValuesProps = {
     carId: '',
     clientId: '',
     userId: '1',
-    rentalDate: getFormatDate(new Date()),
-    startTime: getFormatTime(new Date()),
+    rentalDate: '',
+    startTime: '',
     expectedDateOfReturn: '',
     expectedReturnTime: '12:00',
     comments: '',
@@ -81,6 +81,11 @@ const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState 
     const navigate = useNavigate();
 
     useEffect(() => {
+        setFormValues({
+            ...formValues,
+            rentalDate: getFormatDate(new Date()),
+            startTime: getFormatTime(new Date())
+        });
         fetchData();
     }, []);
 
@@ -114,12 +119,12 @@ const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState 
     return (
         <ViewWrapper as="form" onSubmit={handleAddRental}>
             <Title>Nowe wypożyczenie</Title>
-            <FormFieldSelect options={cars ? carsToOptions(cars) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz pojazd" id="carId" name="carId" value={formValues.carId} onChange={handleInputChange}></FormFieldSelect>
-            <FormFieldSelect options={clients ? clientsToOptions(clients) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz klienta" id="clientId" name="clientId" value={formValues.clientId} onChange={handleInputChange}></FormFieldSelect>
-            <FormFieldDate label="Data od" id="rentalDate" name="rentalDate" value={formValues.rentalDate} onChange={handleInputChange} />
-            <FormFieldTime label="Godzina wynajmu" id="startTime" name="startTime" value={formValues.startTime} onChange={handleInputChange} />
-            <FormFieldDate label="Data do" id="expectedDateOfReturn" name="expectedDateOfReturn" value={formValues.expectedDateOfReturn} onChange={handleInputChange} />
-            <FormFieldTime label="Godzina zwrotu" id="expectedReturnTime" name="expectedReturnTime" value={formValues.expectedReturnTime} onChange={handleInputChange} />
+            <FormFieldSelect isRequired options={cars ? carsToOptions(cars) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz pojazd" id="carId" name="carId" value={formValues.carId} onChange={handleInputChange}></FormFieldSelect>
+            <FormFieldSelect isRequired options={clients ? clientsToOptions(clients) : [{ option: 'Ładowanie...', value: 0 }]} label="Wybierz klienta" id="clientId" name="clientId" value={formValues.clientId} onChange={handleInputChange}></FormFieldSelect>
+            <FormFieldDate isRequired label="Data od" id="rentalDate" name="rentalDate" value={formValues.rentalDate} onChange={handleInputChange} />
+            <FormFieldTime isRequired label="Godzina wynajmu" id="startTime" name="startTime" value={formValues.startTime} onChange={handleInputChange} />
+            <FormFieldDate isRequired minDate={formValues.rentalDate} label="Data do" id="expectedDateOfReturn" name="expectedDateOfReturn" value={formValues.expectedDateOfReturn} onChange={handleInputChange} />
+            <FormFieldTime isRequired label="Godzina zwrotu" id="expectedReturnTime" name="expectedReturnTime" value={formValues.expectedReturnTime} onChange={handleInputChange} />
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">Stwórz</FormButton>
         </ViewWrapper>

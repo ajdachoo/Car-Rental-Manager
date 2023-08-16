@@ -9,6 +9,7 @@ interface FormFieldProps {
     name: string;
     id: string;
     type?: string;
+    isRequired?: boolean;
 };
 
 interface FormFieldSelectProps {
@@ -18,6 +19,11 @@ interface FormFieldSelectProps {
     name: string;
     id: string;
     options: formSelectOptionProps[];
+    isRequired?: boolean;
+};
+
+interface FormFieldDateProps extends FormFieldProps {
+    minDate?: string;
 };
 
 export interface formSelectOptionProps {
@@ -25,40 +31,40 @@ export interface formSelectOptionProps {
     value: string | number;
 };
 
-export const FormField: React.FC<FormFieldProps> = ({ onChange, value, label, name, id, type = 'text' }) => {
+export const FormField: React.FC<FormFieldProps> = ({ onChange, value, label, name, id, type = 'text', isRequired = false }) => {
     return (
         <Wrapper>
             <StyledLabel htmlFor={id}>{label}</StyledLabel>
-            <StyledInput name={name} id={id} type={type} value={value} onChange={onChange} />
+            <StyledInput required={isRequired} name={name} id={id} type={type} value={value} onChange={onChange} />
         </Wrapper>
     );
 };
 
-export const FormFieldSelect: React.FC<FormFieldSelectProps> = ({ onChange, value, label, name, id, options }) => {
+export const FormFieldSelect: React.FC<FormFieldSelectProps> = ({ onChange, value, label, name, id, options, isRequired = false }) => {
     return (
         <Wrapper>
             <StyledLabel htmlFor={id}>{label}</StyledLabel>
-            <StyledSelect name={name} id={id} value={value} onChange={onChange}>
+            <StyledSelect required={isRequired} name={name} id={id} value={value} onChange={onChange}>
                 {options.map((option) => <option key={option.option} value={option.value}>{option.option}</option>)}
             </StyledSelect>
         </Wrapper>
     );
 };
 
-export const FormFieldDate: React.FC<FormFieldProps> = ({ onChange, value, label, name, id }) => {
+export const FormFieldDate: React.FC<FormFieldDateProps> = ({ onChange, value, label, name, id, minDate, isRequired = false }) => {
     return (
         <Wrapper>
             <StyledLabel htmlFor={id}>{label}</StyledLabel>
-            <StyledInput name={name} id={id} type="date" value={value} onChange={onChange} />
+            <StyledInput required={isRequired} min={minDate} name={name} id={id} type="date" value={value} onChange={onChange} />
         </Wrapper>
     );
 };
 
-export const FormFieldTime: React.FC<FormFieldProps> = ({ onChange, value, label, name, id }) => {
+export const FormFieldTime: React.FC<FormFieldProps> = ({ onChange, value, label, name, id, isRequired = false }) => {
     return (
         <Wrapper>
             <StyledLabel htmlFor={id}>{label}</StyledLabel>
-            <StyledInput name={name} id={id} type="time" value={value} onChange={onChange}></StyledInput>
+            <StyledInput required={isRequired} name={name} id={id} type="time" value={value} onChange={onChange}></StyledInput>
         </Wrapper>
     );
 };

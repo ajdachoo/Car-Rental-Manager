@@ -35,7 +35,7 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, in
         switch (status) {
             case RentalStatusEnum.Delayed: return <StyledTd $status='warning'>Opóźnienie: {getDiffDate(currentDate, expectedDateOfReturnFormat) + ' h.'} </StyledTd>;
             case RentalStatusEnum.Active: return <StyledTd $status='inProgress'>W trakcie...</StyledTd>;
-            case RentalStatusEnum.Finished: return <StyledTd $status='succes'>Zwrócono: {getFormatDate(dateOfReturnFormat)}</StyledTd>;
+            case RentalStatusEnum.Finished: return <StyledTd $status='succes'>Zwrócono: {getFormatDate(dateOfReturnFormat) + ' ' + getFormatTime(dateOfReturnFormat)}</StyledTd>;
         };
     };
 

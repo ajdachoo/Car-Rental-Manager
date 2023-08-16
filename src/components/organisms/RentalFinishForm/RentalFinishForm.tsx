@@ -4,7 +4,7 @@ import { FormFieldDate, FormFieldTime } from 'components/molecules/FormField/For
 import { getFormatDate, getFormatTime } from 'components/molecules/RentalTableRow/RentalTableRow';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 import { RentalFinishProps, useRentals } from 'hooks/useRentals';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface formValuesProps {
@@ -13,8 +13,8 @@ interface formValuesProps {
 }
 
 const initialFormState: formValuesProps = {
-    returnTime: getFormatTime(new Date()),
-    dateOfReturn: getFormatDate(new Date())
+    returnTime: '',
+    dateOfReturn: ''
 }
 
 const formValuesToRentalFinishProps = (formValues: formValuesProps): RentalFinishProps => {
@@ -28,6 +28,14 @@ const RentalFinishForm: React.FC = () => {
     const { getFinishRental } = useRentals();
     const navigate = useNavigate();
     const { rentalID } = useParams();
+
+    useEffect(() => {
+        setFormValues({
+            ...formValues,
+            returnTime: getFormatTime(new Date()),
+            dateOfReturn: getFormatDate(new Date())
+        });
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormValues({
@@ -55,8 +63,8 @@ const RentalFinishForm: React.FC = () => {
     return (
         <ViewWrapper as='form' onSubmit={handleFinishRental}>
             <Title>Zakończ wypożyczenie</Title>
-            <FormFieldDate label="Data zwrotu" id="dateOfReturn" name="dateOfReturn" value={formValues.dateOfReturn} onChange={handleInputChange} />
-            <FormFieldTime label="Godzina zwrotu" id="returnTime" name="returnTime" value={formValues.returnTime} onChange={handleInputChange} />
+            <FormFieldDate isRequired label="Data zwrotu" id="dateOfReturn" name="dateOfReturn" value={formValues.dateOfReturn} onChange={handleInputChange} />
+            <FormFieldTime isRequired label="Godzina zwrotu" id="returnTime" name="returnTime" value={formValues.returnTime} onChange={handleInputChange} />
             <FormButton type='submit'>Zakończ</FormButton>
         </ViewWrapper>
     );

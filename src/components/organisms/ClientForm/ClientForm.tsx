@@ -165,13 +165,13 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
     return (
         <ViewWrapper as="form" onSubmit={method === 'add' ? handleAddClient : handleEditClient}>
             <Title>{method === 'add' ? 'Dodaj nowego klienta' : 'Edytuj dane klienta'}</Title>
-            <FormField label="Imię" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
-            <FormField label="Nazwisko" id="surname" name="surname" value={formValues.surname} onChange={handleInputChange} />
-            <FormField label="Nr paszportu/pesel" id="peselOrPassportNumber" name="peselOrPassportNumber" value={formValues.peselOrPassportNumber} onChange={handleInputChange} />
-            <FormField type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
-            <FormField type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
-            <FormField label="Kategoria prawa jazdy" id="drivingLicenseCategories" name="drivingLicenseCategories" value={formValues.drivingLicenseCategories} onChange={handleInputChange} />
-            <FormFieldSelect options={statusOptions} label="Status" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
+            <FormField isRequired label="Imię" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
+            <FormField isRequired label="Nazwisko" id="surname" name="surname" value={formValues.surname} onChange={handleInputChange} />
+            <FormField isRequired label="Nr paszportu/pesel" id="peselOrPassportNumber" name="peselOrPassportNumber" value={formValues.peselOrPassportNumber} onChange={handleInputChange} />
+            <FormField isRequired type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
+            <FormField isRequired type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
+            <FormField isRequired label="Kategoria prawa jazdy" id="drivingLicenseCategories" name="drivingLicenseCategories" value={formValues.drivingLicenseCategories} onChange={handleInputChange} />
+            <FormFieldSelect isRequired options={statusOptions} label="Status" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</FormButton>
         </ViewWrapper>
