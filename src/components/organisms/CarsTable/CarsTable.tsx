@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'components/molecules/DataTable/DataTable';
 import CarTableRow from 'components/molecules/CarTableRow/CarTableRow';
-import { useCars, CarProps } from 'hooks/useCars';
+import { useCars, CarProps, CarStatusEnum } from 'hooks/useCars';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
+import { useParams } from 'react-router-dom';
 
 const headers = ['#', 'ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin', 'Status'];
 
@@ -10,13 +11,14 @@ const CarsTable: React.FC = () => {
     const [cars, setCars] = useState<CarProps[]>();
     const status = 'Ładowanie...';
     const { getCars, deleteCar } = useCars();
+    const { statusQueryParam } = useParams();
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [statusQueryParam]);
 
     const fetchData = async () => {
-        const clients = await getCars();
+        const clients = await getCars(statusQueryParam as CarStatusEnum);
         setCars(clients);
     };
 

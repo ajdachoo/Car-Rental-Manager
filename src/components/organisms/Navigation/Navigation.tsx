@@ -23,10 +23,10 @@ const Navigation: React.FC = () => {
                 <p>Pojazdy</p>
                 <StyledNavLink to="/cars"><TableListIcon />Wszystkie</StyledNavLink>
                 <StyledNavLink to="/addCar"><NewIcon />Dodaj nowy</StyledNavLink>
-                <StyledNavLink to="/cars"><CheckIcon />Dostępne</StyledNavLink>
-                <StyledNavLink to="/cars"><SpinnerIcon />Wypożyczone</StyledNavLink>
-                <StyledNavLink to="/cars"><ExclamationTriangleIcon />Niesprawne</StyledNavLink>
-                <StyledNavLink to="/cars"><WrenchIcon />Serwisowane</StyledNavLink>
+                <StyledNavLink to="/carsByStatus/Avaliable"><CheckIcon />Dostępne</StyledNavLink>
+                <StyledNavLink to="/carsByStatus/Rented"><SpinnerIcon />Wypożyczone</StyledNavLink>
+                <StyledNavLink to="/carsByStatus/OutOfOrder"><ExclamationTriangleIcon />Niesprawne</StyledNavLink>
+                <StyledNavLink to="/carsByStatus/InService"><WrenchIcon />Serwisowane</StyledNavLink>
             </NavSection>
             <NavSection>
                 <p>Klienci</p>

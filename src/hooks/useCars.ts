@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import API from './API';
 
 export const useCars = () => {
-    const getCars = useCallback(async () => {
+    const getCars = useCallback(async (status?: CarStatusEnum) => {
         try {
-            const result = await API.get<CarProps[]>('/cars');
+            const result = await API.get<CarProps[]>('/cars', { params: { status } });
             return result.data;
         } catch (e) {
             console.log(e);
