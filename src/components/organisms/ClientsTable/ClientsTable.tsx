@@ -5,7 +5,8 @@ import { useClients, ClientProps } from 'hooks/useClients';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 import { useParams } from 'react-router-dom';
 
-const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategorie prawa jazdy', 'Status', 'Komentarz'];
+const headers = ['#', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategorie prawa jazdy', 'Status', 'Komentarz'];
+//const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategorie prawa jazdy', 'Status', 'Komentarz'];
 
 const ClientsTable: React.FC = () => {
     const [clients, setClients] = useState<ClientProps[]>();

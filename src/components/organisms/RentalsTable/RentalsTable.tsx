@@ -5,7 +5,8 @@ import { useRentals, RentalProps, RentalStatusEnum } from 'hooks/useRentals';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 import { useParams } from 'react-router-dom';
 
-const headers = ['#', 'ID', 'ID pojazdu', 'Marka', 'Model', 'Nr rejestracyjny', 'ID klienta', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Okres wypożyczenia', 'Status', 'Kwota', 'Komentarz'];
+//const headers = ['#', 'ID', 'ID pojazdu', 'Marka', 'Model', 'Nr rejestracyjny', 'ID klienta', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Okres wypożyczenia', 'Status', 'Kwota', 'Komentarz'];
+const headers = ['#', 'Marka', 'Model', 'Nr rejestracyjny', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Okres wypożyczenia', 'Status', 'Kwota', 'Komentarz'];
 
 const RentalsTable: React.FC = () => {
     const [rentals, setRentals] = useState<RentalProps[]>();

@@ -5,7 +5,8 @@ import { useCars, CarProps, CarStatusEnum } from 'hooks/useCars';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
 import { useParams } from 'react-router-dom';
 
-const headers = ['#', 'ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin', 'Status'];
+const headers = ['#', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin', 'Status'];
+//const headers = ['#', 'ID', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 'Ilość miejsc', 'Cena /dzień', 'Numer rejestracyjny', 'Numer Vin', 'Status'];
 
 const CarsTable: React.FC = () => {
     const [cars, setCars] = useState<CarProps[]>();

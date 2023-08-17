@@ -42,12 +42,12 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, in
     return (
         <StyledTr>
             <StyledTd>{`${index + 1}.`}</StyledTd>
-            <StyledTd>{id}</StyledTd>
-            <StyledTd>{carId}</StyledTd>
+            {/*<StyledTd>{id}</StyledTd>*/}
+            {/*<StyledTd>{carId}</StyledTd>*/}
             <StyledTd>{mark}</StyledTd>
             <StyledTd>{model}</StyledTd>
             <StyledTd>{registrationNumber}</StyledTd>
-            <StyledTd>{clientId}</StyledTd>
+            {/*<StyledTd>{clientId}</StyledTd>*/}
             <StyledTd>{name}</StyledTd>
             <StyledTd>{surname}</StyledTd>
             <StyledTd>{peselOrPassportNumber}</StyledTd>

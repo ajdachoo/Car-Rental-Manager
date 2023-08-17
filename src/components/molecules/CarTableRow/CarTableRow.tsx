@@ -32,7 +32,7 @@ const CarTableRow: React.FC<CarTableRowProps> = ({ index, handleDeleteCar, carDa
     return (
         <StyledTr>
             <StyledTd>{`${index + 1}.`}</StyledTd>
-            <StyledTd>{id}</StyledTd>
+            {/*<StyledTd>{id}</StyledTd>*/}
             <StyledTd>{mark}</StyledTd>
             <StyledTd>{model}</StyledTd>
             {getTransmissionComponent()}

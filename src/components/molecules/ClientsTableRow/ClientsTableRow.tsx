@@ -20,7 +20,7 @@ const ClientTableRow: React.FC<ClientsTableRowProps> = ({ index, handleDeleteCli
     return (
         <StyledTr>
             <StyledTd>{`${index + 1}.`}</StyledTd>
-            <StyledTd>{id}</StyledTd>
+            {/*<StyledTd>{id}</StyledTd>*/}
             <StyledTd>{name}</StyledTd>
             <StyledTd>{surname}</StyledTd>
             <StyledTd>{peselOrPassportNumber}</StyledTd>
