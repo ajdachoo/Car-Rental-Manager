@@ -3,6 +3,7 @@ import DataTable from 'components/molecules/DataTable/DataTable';
 import ClientTableRow from 'components/molecules/ClientsTableRow/ClientsTableRow';
 import { useClients, ClientProps } from 'hooks/useClients';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper.styles';
+import { useParams } from 'react-router-dom';
 
 const headers = ['#', 'ID', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telefon', 'Kategorie prawa jazdy', 'Status', 'Komentarz'];
 
@@ -10,13 +11,14 @@ const ClientsTable: React.FC = () => {
     const [clients, setClients] = useState<ClientProps[]>();
     const status = 'Ładowanie...';
     const { getClients, deleteClient } = useClients();
+    const { isBlocked } = useParams();
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [isBlocked]);
 
     const fetchData = async () => {
-        const clients = await getClients();
+        const clients = await getClients(isBlocked ? isBlocked === 'true' : undefined);
         setClients(clients);
     };
 

@@ -3,9 +3,9 @@ import API from './API';
 import { DrivingLicenseCategoriesEnum } from './useCars';
 
 export const useClients = () => {
-    const getClients = useCallback(async () => {
+    const getClients = useCallback(async (status?: boolean) => {
         try {
-            const result = await API.get<ClientProps[]>('/clients');
+            const result = await API.get<ClientProps[]>('/clients', { params: { isBlocked: status } });
             return result.data;
         } catch (e) {
             console.log(e);

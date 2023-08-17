@@ -18,8 +18,13 @@ const RentalsTable: React.FC = () => {
     }, [statusQueryParam]);
 
     const fetchData = async () => {
-        const rental = await getRentals(statusQueryParam as RentalStatusEnum);
-        setRentals(rental);
+        if (statusQueryParam === RentalStatusEnum.Active.toString()) {
+            const [activeRentals, delayedRentals] = await Promise.all([getRentals(RentalStatusEnum.Active), getRentals(RentalStatusEnum.Delayed)]);
+            setRentals([...activeRentals || [], ...delayedRentals || []]);
+        } else {
+            const rental = await getRentals(statusQueryParam as RentalStatusEnum);
+            setRentals(rental);
+        }
     };
 
     const handleDeleteRental = async (id: number) => {

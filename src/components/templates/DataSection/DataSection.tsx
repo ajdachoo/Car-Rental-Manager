@@ -20,6 +20,7 @@ const DataSection: React.FC = () => {
                 <Route path='/addCar' element={<CarForm method='add' />} />
                 <Route path='/editCar/:editCarID' element={<CarEditForm />} />
                 <Route path='/clients' element={<ClientsTable />} />
+                <Route path='/blockedClients/:isBlocked' element={<ClientsTable />} />
                 <Route path='/addClient' element={<ClientForm method='add' />} />
                 <Route path='/editClient/:editClientID' element={<ClientEditForm />} />
                 <Route path='/rentals' element={<RentalsTable />} />

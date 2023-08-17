@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
                 <p>Klienci</p>
                 <StyledNavLink to="/clients"><TableListIcon />Wszyscy</StyledNavLink>
                 <StyledNavLink to="/addClient"><NewIcon />Dodaj nowego</StyledNavLink>
-                <StyledNavLink to="/clients"><XMarkIcon />Zablokowani</StyledNavLink>
+                <StyledNavLink to="/blockedClients/true"><XMarkIcon />Zablokowani</StyledNavLink>
             </NavSection>
             <NavSection>
                 <p>Wypożyczenia</p>
