@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: 'https://localhost:5001/api',
+    baseURL: 'https://car-rental-manager-api-app.azurewebsites.net/api',
 });
 
 export default API;
 
-//https://rentcar-api-app.azurewebsites.net/api
+//https://car-rental-manager-api-app.azurewebsites.net/api
 //https://localhost:5001/api
