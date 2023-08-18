@@ -1,15 +1,21 @@
 {
   "files": {
     "main.css": "/Car-Rental-Manager/static/css/main.28c8b3b2.css",
-    "main.js": "/Car-Rental-Manager/static/js/main.26a04246.js",
+    "main.js": "/Car-Rental-Manager/static/js/main.4da5585a.js",
+    "static/media/screwdriver-wrench-solid.svg": "/Car-Rental-Manager/static/media/screwdriver-wrench-solid.50ed09729f426328106cf44a9e2b09d7.svg",
     "static/media/pen-to-square-solid.svg": "/Car-Rental-Manager/static/media/pen-to-square-solid.eba13f47dfe29b03b3eeffbb9a97aadb.svg",
     "index.html": "/Car-Rental-Manager/index.html",
     "static/media/house-solid.svg": "/Car-Rental-Manager/static/media/house-solid.280c584b718b0d189a41faf145ca7fb0.svg",
+    "static/media/spinner-solid.svg": "/Car-Rental-Manager/static/media/spinner-solid.762f528cbeff6c1f25ef9f9fa559dd57.svg",
+    "static/media/triangle-exclamation-solid.svg": "/Car-Rental-Manager/static/media/triangle-exclamation-solid.0845f433652a98f3a8c6a773b0973f68.svg",
+    "static/media/xmark-solid.svg": "/Car-Rental-Manager/static/media/xmark-solid.599785d3d869c73c367c5cd081d2d986.svg",
     "static/media/table-list-solid.svg": "/Car-Rental-Manager/static/media/table-list-solid.afdd9371b3961d20d1ee60e7a3e74225.svg",
-    "main.26a04246.js.map": "/Car-Rental-Manager/static/js/main.26a04246.js.map"
+    "static/media/clock-regular.svg": "/Car-Rental-Manager/static/media/clock-regular.06db7229936746a1dbd26241f349d07c.svg",
+    "static/media/check-solid.svg": "/Car-Rental-Manager/static/media/check-solid.bf308da78287c2375b56a31475f40ec9.svg",
+    "main.4da5585a.js.map": "/Car-Rental-Manager/static/js/main.4da5585a.js.map"
   },
   "entrypoints": [
     "static/css/main.28c8b3b2.css",
-    "static/js/main.26a04246.js"
+    "static/js/main.4da5585a.js"
   ]
 }
