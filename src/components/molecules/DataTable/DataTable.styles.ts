@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledTable = styled.table`
-    font-size: ${({ theme }) => theme.fontSize.ml};
+    font-size: ${({ theme }) => theme.fontSize.m};
     border-collapse: collapse;
     
     tr {
@@ -11,5 +11,9 @@ export const StyledTable = styled.table`
     th {
         padding: 10px;
         text-align: left;
+    }
+
+    button {
+        font-size: ${({ theme }) => theme.fontSize.m};
     }
 `;
