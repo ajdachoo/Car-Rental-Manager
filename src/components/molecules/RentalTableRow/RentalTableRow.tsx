@@ -51,7 +51,7 @@ const RentalTableRow: React.FC<RentalsTableRowProps> = ({ handleDeleteRental, in
             <StyledTd>{name}</StyledTd>
             <StyledTd>{surname}</StyledTd>
             <StyledTd>{peselOrPassportNumber}</StyledTd>
-            <StyledTd>{getFormatDate(hireDateFormat) + ' ' + getFormatTime(hireDateFormat) + ' do ' + getFormatDate(expectedDateOfReturnFormat) + ' ' + getFormatTime(hireDateFormat)}</StyledTd>
+            <StyledTd>{getFormatDate(hireDateFormat) + ' ' + getFormatTime(hireDateFormat) + ' do ' + getFormatDate(expectedDateOfReturnFormat) + ' ' + getFormatTime(expectedDateOfReturnFormat)}</StyledTd>
             {getStatusComponent()}
             <StyledTd >{`${amount.toFixed(2)} zł.`}</StyledTd>
             <StyledTd >{comments}</StyledTd>

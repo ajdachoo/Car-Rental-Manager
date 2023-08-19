@@ -6,7 +6,6 @@ import { FormButton } from "components/molecules/FormField/Form.styles";
 import { ClientPutPostProps, useClients } from "hooks/useClients";
 import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
-import { DrivingLicenseCategoriesEnum } from "hooks/useCars";
 
 interface FormProps {
     initialformValues?: formValuesProps;
@@ -45,73 +44,6 @@ const statusOptions: formSelectOptionProps[] = [
         option: 'Zablokowany',
         value: 'true',
     }];
-
-const drivingLicenseCategories: formSelectOptionProps[] = [
-    {
-        option: DrivingLicenseCategoriesEnum.AM,
-        value: DrivingLicenseCategoriesEnum.AM,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.A1,
-        value: DrivingLicenseCategoriesEnum.A1,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.A2,
-        value: DrivingLicenseCategoriesEnum.A2,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.A,
-        value: DrivingLicenseCategoriesEnum.A,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.B1,
-        value: DrivingLicenseCategoriesEnum.B1,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.B,
-        value: DrivingLicenseCategoriesEnum.B,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.C1,
-        value: DrivingLicenseCategoriesEnum.C1,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.C,
-        value: DrivingLicenseCategoriesEnum.C,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.D1,
-        value: DrivingLicenseCategoriesEnum.D1,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.D,
-        value: DrivingLicenseCategoriesEnum.D,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.BE,
-        value: DrivingLicenseCategoriesEnum.BE,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.C1E,
-        value: DrivingLicenseCategoriesEnum.C1E,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.CE,
-        value: DrivingLicenseCategoriesEnum.CE,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.D1E,
-        value: DrivingLicenseCategoriesEnum.D1E,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.DE,
-        value: DrivingLicenseCategoriesEnum.DE,
-    },
-    {
-        option: DrivingLicenseCategoriesEnum.T,
-        value: DrivingLicenseCategoriesEnum.T,
-    },
-];
 
 const formValuesToClientProps = (formValues: formValuesProps): ClientPutPostProps => {
     return {
@@ -170,7 +102,7 @@ const ClientForm: React.FC<FormProps> = ({ initialformValues = initialFormState,
             <FormField isRequired label="Nr paszportu/pesel" id="peselOrPassportNumber" name="peselOrPassportNumber" value={formValues.peselOrPassportNumber} onChange={handleInputChange} />
             <FormField isRequired type="email" label="Email" id="email" name="email" value={formValues.email} onChange={handleInputChange} />
             <FormField isRequired type="tel" label="Numer telefonu" id="phoneNumber" name="phoneNumber" value={formValues.phoneNumber} onChange={handleInputChange} />
-            <FormField isRequired label="Kategoria prawa jazdy" id="drivingLicenseCategories" name="drivingLicenseCategories" value={formValues.drivingLicenseCategories} onChange={handleInputChange} />
+            <FormField isRequired label="Kategorie prawa jazdy(po przecinku: AM,A1,A2,A,B1,B,C1,C,D1,D,BE,C1E,CE,D1E,DE,T)" id="drivingLicenseCategories" name="drivingLicenseCategories" value={formValues.drivingLicenseCategories} onChange={handleInputChange} />
             <FormFieldSelect isRequired options={statusOptions} label="Status" id="isBlocked" name="isBlocked" value={formValues.isBlocked.toString()} onChange={handleInputChange}></FormFieldSelect>
             <FormField label="Komentarz" id="comments" name="comments" value={formValues.comments} onChange={handleInputChange} />
             <FormButton type="submit">{method === 'add' ? 'Dodaj' : 'Zatwierdź'}</FormButton>

@@ -11,6 +11,7 @@ html {
   
   body {
     font-family: 'Montserrat', sans-serif;
+    font-variant-numeric: tabular-nums;
     margin: 0;
     padding: 0;
     overflow-y: hidden;
@@ -18,5 +19,6 @@ html {
   
   a, button, input {
     font-family: 'Montserrat', sans-serif;
+    font-variant-numeric: tabular-nums;
   }
 `;
