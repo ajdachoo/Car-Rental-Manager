@@ -55,7 +55,7 @@ const clientsToOptions = (clients: ClientProps[]): formSelectOptionProps[] => {
             options.push({ option: `${name} ${surname} ${peselOrPassportNumber}`, value: id })
         };
     });
-    return options.length > 0 ? options : [{ option: 'Brak', value: 0 }];
+    return options.length > 1 ? options : [{ option: 'Brak dostępnych klientów', value: '' }];
 };
 
 const carsToOptions = (cars: CarProps[]): formSelectOptionProps[] => {
@@ -66,7 +66,7 @@ const carsToOptions = (cars: CarProps[]): formSelectOptionProps[] => {
             options.push({ option: `${mark} ${model} ${registrationNumber} ${enginePower}KM ${transmission} ${numberOfSeats}msc. ${pricePerDay.toFixed(2)} zł./dzień`, value: id })
         };
     });
-    return options.length > 0 ? options : [{ option: 'Brak', value: 0 }];
+    return options.length > 1 ? options : [{ option: 'Brak dostępnych pojazdów', value: '' }];
 };
 
 const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState }) => {
