@@ -10,18 +10,24 @@ const headers = ['#', 'Imię', 'Nazwisko', 'Nr paszportu/pesel', 'Email', 'Telef
 
 const ClientsTable: React.FC = () => {
     const [clients, setClients] = useState<ClientProps[]>();
-    const status = 'Ładowanie...';
+    const [status, setStatus] = useState('');
     const { getClients, deleteClient } = useClients();
     const { isBlocked } = useParams();
 
+    const fetchData = async () => {
+        setStatus('Ładowanie...');
+        const clients = await getClients(isBlocked ? isBlocked === 'true' : undefined);
+        if (clients?.length === 0 || !clients) {
+            setStatus('Brak');
+            return;
+        }
+        setClients(clients);
+        setStatus('');
+    };
+
     useEffect(() => {
         fetchData();
-    }, [isBlocked]);
-
-    const fetchData = async () => {
-        const clients = await getClients(isBlocked ? isBlocked === 'true' : undefined);
-        setClients(clients);
-    };
+    }, [isBlocked, getClients]);
 
     const handleDeleteClient = async (id: number) => {
         await deleteClient(id);
@@ -31,7 +37,7 @@ const ClientsTable: React.FC = () => {
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {clients ? clients.map((client, index) => (<ClientTableRow index={index} handleDeleteClient={handleDeleteClient} key={client.id} clientData={client} />)) : <tr><th>{status}</th></tr>}
+                {status === '' && clients ? clients.map((client, index) => (<ClientTableRow index={index} handleDeleteClient={handleDeleteClient} key={client.id} clientData={client} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );

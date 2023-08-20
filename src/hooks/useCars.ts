@@ -80,19 +80,19 @@ export interface CarPutPostProps {
     vin: string,
     status: CarStatusEnum,
     comments: string
-}
+};
 
 export enum TransmissionEnum {
     Authomatic = 'Authomatic',
     Manual = 'Manual'
-}
+};
 
 export enum CarStatusEnum {
     OutOfOrder = 'OutOfOrder',
     InService = 'InService',
     Rented = 'Rented',
     Avaliable = 'Avaliable'
-}
+};
 
 export enum DrivingLicenseCategoriesEnum {
     AM = 'AM',
@@ -111,25 +111,4 @@ export enum DrivingLicenseCategoriesEnum {
     D1E = 'D1E',
     DE = 'DE',
     T = 'T'
-}
-
-/*const api = axios.create({
-    baseURL: 'https://localhost:5001/api/',
-});
-
-const endpoints = {
-    cars: 'cars'
 };
-
-const [cars, setCars] = useState([]);
-
-useEffect(() => {
-    api.get(endpoints.cars)
-        .then(({ data }) => {
-            setCars(data)
-            console.log(data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}, []); */

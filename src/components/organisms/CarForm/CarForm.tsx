@@ -156,7 +156,6 @@ const CarForm: React.FC<FormProps> = ({ initialformValues = initialFormState, me
     const handleAddCar = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formatCar = formValuesToCarProps(formValues)
-        console.log(formatCar);
         const response = await postCar(formatCar);
         if (isAxiosError(response)) {
             alert('niepoprawne dane!');

@@ -10,7 +10,7 @@ const headers = ['#', 'Marka', 'Model', 'Nr rejestracyjny', 'Imię', 'Nazwisko',
 
 const RentalsTable: React.FC = () => {
     const [rentals, setRentals] = useState<RentalProps[]>();
-    const status = 'Ładowanie...';
+    const [status, setStatus] = useState('');
     const { getRentals, deleteRental } = useRentals();
     const { statusQueryParam } = useParams();
 
@@ -19,13 +19,24 @@ const RentalsTable: React.FC = () => {
     }, [statusQueryParam]);
 
     const fetchData = async () => {
+        setStatus('Ładowanie...');
         if (statusQueryParam === RentalStatusEnum.Active.toString()) {
             const [activeRentals, delayedRentals] = await Promise.all([getRentals(RentalStatusEnum.Active), getRentals(RentalStatusEnum.Delayed)]);
-            setRentals([...activeRentals || [], ...delayedRentals || []]);
+            const rentals = [...activeRentals || [], ...delayedRentals || []];
+            if (rentals.length === 0) {
+                setStatus('Brak');
+                return;
+            }
+            setRentals(rentals);
         } else {
-            const rental = await getRentals(statusQueryParam as RentalStatusEnum);
-            setRentals(rental);
+            const rentals = await getRentals(statusQueryParam as RentalStatusEnum);
+            if (rentals?.length === 0 || !rentals) {
+                setStatus('Brak');
+                return;
+            }
+            setRentals(rentals);
         }
+        setStatus('');
     };
 
     const handleDeleteRental = async (id: number) => {
@@ -36,7 +47,7 @@ const RentalsTable: React.FC = () => {
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {rentals ? rentals.map((rental, index) => (<RentalTableRow handleDeleteRental={handleDeleteRental} index={index} key={rental.id} rentalData={rental} />)) : <tr><th>{status}</th></tr>}
+                {status === '' && rentals ? rentals.map((rental, index) => (<RentalTableRow handleDeleteRental={handleDeleteRental} index={index} key={rental.id} rentalData={rental} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );

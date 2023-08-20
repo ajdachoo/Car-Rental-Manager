@@ -37,7 +37,6 @@ const initialFormState: formValuesProps = {
 };
 
 const formValuesToRentalProps = (formValues: formValuesProps): RentalPutPostProps => {
-    console.log(`${formValues.expectedDateOfReturn},${formValues.expectedReturnTime}`);
     return {
         carId: parseInt(formValues.carId),
         clientId: parseInt(formValues.clientId),
@@ -100,13 +99,11 @@ const RentalForm: React.FC<FormProps> = ({ initialformValues = initialFormState 
             ...formValues,
             [e.target.name]: e.target.value
         });
-        console.log(formValues);
     };
 
     const handleAddRental = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formatRental = formValuesToRentalProps(formValues)
-        console.log(formatRental);
         const response = await postRental(formatRental);
         if (isAxiosError(response)) {
             alert('niepoprawne dane!');

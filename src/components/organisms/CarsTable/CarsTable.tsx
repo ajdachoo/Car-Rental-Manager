@@ -10,17 +10,23 @@ const headers = ['#', 'Marka', 'Model', 'Skrzynia Biegów', 'Moc', 'Kategoria', 
 
 const CarsTable: React.FC = () => {
     const [cars, setCars] = useState<CarProps[]>();
-    const status = 'Ładowanie...';
+    const [status, setStatus] = useState('');
     const { getCars, deleteCar } = useCars();
     const { statusQueryParam } = useParams();
 
     useEffect(() => {
         fetchData();
-    }, [statusQueryParam]);
+    }, [statusQueryParam, getCars]);
 
     const fetchData = async () => {
-        const clients = await getCars(statusQueryParam as CarStatusEnum);
-        setCars(clients);
+        setStatus('Ładowanie...');
+        const cars = await getCars(statusQueryParam as CarStatusEnum);
+        if (cars?.length === 0 || !cars) {
+            setStatus('Brak');
+            return;
+        }
+        setCars(cars);
+        setStatus('');
     };
 
     const handleDeleteCar = async (id: number) => {
@@ -28,12 +34,10 @@ const CarsTable: React.FC = () => {
         fetchData();
     };
 
-
-
     return (
         <ViewWrapper>
             <DataTable tableHeaders={headers}>
-                {cars ? cars.map((car, index) => (<CarTableRow index={index} handleDeleteCar={handleDeleteCar} key={car.id} carData={car} />)) : <tr><th>{status}</th></tr>}
+                {status === '' && cars ? cars.map((car, index) => (<CarTableRow index={index} handleDeleteCar={handleDeleteCar} key={car.id} carData={car} />)) : <tr><th>{status}</th></tr>}
             </DataTable>
         </ViewWrapper>
     );
