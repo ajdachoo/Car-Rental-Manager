@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Car-Rental-Manager/static/css/main.28c8b3b2.css",
-    "main.js": "/Car-Rental-Manager/static/js/main.d29c9917.js",
+    "main.js": "/Car-Rental-Manager/static/js/main.752ba212.js",
     "static/media/screwdriver-wrench-solid.svg": "/Car-Rental-Manager/static/media/screwdriver-wrench-solid.50ed09729f426328106cf44a9e2b09d7.svg",
     "static/media/pen-to-square-solid.svg": "/Car-Rental-Manager/static/media/pen-to-square-solid.eba13f47dfe29b03b3eeffbb9a97aadb.svg",
     "index.html": "/Car-Rental-Manager/index.html",
@@ -12,10 +12,10 @@
     "static/media/table-list-solid.svg": "/Car-Rental-Manager/static/media/table-list-solid.afdd9371b3961d20d1ee60e7a3e74225.svg",
     "static/media/clock-regular.svg": "/Car-Rental-Manager/static/media/clock-regular.06db7229936746a1dbd26241f349d07c.svg",
     "static/media/check-solid.svg": "/Car-Rental-Manager/static/media/check-solid.bf308da78287c2375b56a31475f40ec9.svg",
-    "main.d29c9917.js.map": "/Car-Rental-Manager/static/js/main.d29c9917.js.map"
+    "main.752ba212.js.map": "/Car-Rental-Manager/static/js/main.752ba212.js.map"
   },
   "entrypoints": [
     "static/css/main.28c8b3b2.css",
-    "static/js/main.d29c9917.js"
+    "static/js/main.752ba212.js"
   ]
 }
